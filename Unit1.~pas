@@ -12,6 +12,7 @@ type
     img1: TImage;
     img2: TImage;
     pnl2: TPanel;
+    btn1: TButton;
     btn2: TButton;
     btn3: TButton;
     btn4: TButton;
