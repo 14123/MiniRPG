@@ -155,13 +155,21 @@ object Form1: TForm1
     Height = 265
     TabOrder = 1
   end
+  object btn1: TButton
+    Left = 728
+    Top = 288
+    Width = 50
+    Height = 50
+    Caption = 'Q'
+    TabOrder = 2
+  end
   object btn2: TButton
     Left = 784
     Top = 288
     Width = 50
     Height = 50
     Caption = 'W'
-    TabOrder = 2
+    TabOrder = 3
   end
   object btn3: TButton
     Left = 840
@@ -169,7 +177,7 @@ object Form1: TForm1
     Width = 50
     Height = 50
     Caption = 'E'
-    TabOrder = 3
+    TabOrder = 4
   end
   object btn4: TButton
     Left = 728
@@ -177,7 +185,7 @@ object Form1: TForm1
     Width = 50
     Height = 50
     Caption = 'A'
-    TabOrder = 4
+    TabOrder = 5
   end
   object btn5: TButton
     Left = 784
@@ -185,7 +193,7 @@ object Form1: TForm1
     Width = 50
     Height = 50
     Caption = 'S'
-    TabOrder = 5
+    TabOrder = 6
   end
   object btn6: TButton
     Left = 840
@@ -193,6 +201,6 @@ object Form1: TForm1
     Width = 50
     Height = 50
     Caption = 'D'
-    TabOrder = 6
+    TabOrder = 7
   end
 end
