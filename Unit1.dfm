@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 234
-  Top = 139
-  Width = 1131
-  Height = 440
+  Left = 302
+  Top = 152
+  Width = 928
+  Height = 455
   Caption = 'Form1'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,28 +15,21 @@ object Form1: TForm1
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
-  object lbl1: TLabel
-    Left = 736
-    Top = 24
-    Width = 16
-    Height = 13
-    Caption = 'lbl1'
-  end
   object pnl1: TPanel
-    Left = 0
-    Top = 0
-    Width = 900
+    Left = 8
+    Top = 8
+    Width = 700
     Height = 400
     TabOrder = 0
     object img1: TImage
       Left = 0
       Top = 0
-      Width = 900
+      Width = 700
       Height = 400
     end
     object img2: TImage
-      Left = 690
-      Top = 152
+      Left = 290
+      Top = 144
       Width = 50
       Height = 72
       Picture.Data = {
@@ -154,5 +147,60 @@ object Form1: TForm1
         659FCCB6328DEE58659C3B001BA7D28A2B0AB8A9D48284ADA7DFF79D987CB695
         0ACEB53BDDAB5AFA795979743F7428A28AE63D03FFD9}
     end
+  end
+  object pnl2: TPanel
+    Left = 720
+    Top = 8
+    Width = 185
+    Height = 265
+    TabOrder = 1
+  end
+  object btn1: TButton
+    Left = 728
+    Top = 288
+    Width = 50
+    Height = 50
+    Caption = 'Q'
+    TabOrder = 2
+  end
+  object btn2: TButton
+    Left = 784
+    Top = 288
+    Width = 50
+    Height = 50
+    Caption = 'W'
+    TabOrder = 3
+  end
+  object btn3: TButton
+    Left = 840
+    Top = 288
+    Width = 50
+    Height = 50
+    Caption = 'E'
+    TabOrder = 4
+  end
+  object btn4: TButton
+    Left = 728
+    Top = 344
+    Width = 50
+    Height = 50
+    Caption = 'A'
+    TabOrder = 5
+  end
+  object btn5: TButton
+    Left = 784
+    Top = 344
+    Width = 50
+    Height = 50
+    Caption = 'S'
+    TabOrder = 6
+  end
+  object btn6: TButton
+    Left = 840
+    Top = 344
+    Width = 50
+    Height = 50
+    Caption = 'D'
+    TabOrder = 7
   end
 end
