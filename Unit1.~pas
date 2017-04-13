@@ -22,7 +22,6 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    wall0: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
@@ -42,7 +41,6 @@ implementation
 
 var
   x,y:array [1..2] of Byte;
- // xwall,ywall:array [1..2] of Byte;
 
 {$R *.dfm}
 
@@ -51,8 +49,7 @@ var
   S:string;
 begin
    S:=ExtractFilePath(Application.ExeName);
-   img1.Picture.LoadFromFile(s+'im\1.jpg');
- //  wall0.Picture.LoadFromFile(s+'im\wall0.jpg');
+   img1.Picture.LoadFromFile(s+'1.jpg');
    x[1]:=img2.Left div 10;
    y[1]:=img2.Top div 10;
    Label1.Caption:='Left:';

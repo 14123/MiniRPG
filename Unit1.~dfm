@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 392
-  Top = 258
+  Left = 362
+  Top = 214
   Width = 928
   Height = 455
   Caption = 'Form1'
@@ -32,7 +32,7 @@ object Form1: TForm1
       Left = 290
       Top = 140
       Width = 50
-      Height = 70
+      Height = 72
       Picture.Data = {
         0A544A504547496D616765070E0000FFD8FFE000104A46494600010101006000
         600000FFE100664578696600004D4D002A000000080006011200030000000100
@@ -147,12 +147,6 @@ object Form1: TForm1
         7F67B93E1D7FC15C7E24F887C2FF0008FE257C30F8637FE0D10E97078A74E9E0
         659FCCB6328DEE58659C3B001BA7D28A2B0AB8A9D48284ADA7DFF79D987CB695
         0ACEB53BDDAB5AFA795979743F7428A28AE63D03FFD9}
-    end
-    object wall0: TImage
-      Left = 370
-      Top = 30
-      Width = 30
-      Height = 200
     end
   end
   object pnl2: TPanel
