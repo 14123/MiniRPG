@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 392
-  Top = 258
+  Left = 210
+  Top = 250
   Width = 928
   Height = 455
   Caption = 'Form1'
@@ -170,22 +170,22 @@ object Form1: TForm1
     object Label2: TLabel
       Left = 104
       Top = 16
-      Width = 65
-      Height = 33
+      Width = 31
+      Height = 13
       Caption = 'Label2'
     end
     object Label3: TLabel
       Left = 16
       Top = 72
-      Width = 49
-      Height = 25
+      Width = 31
+      Height = 13
       Caption = 'Label3'
     end
     object Label4: TLabel
       Left = 96
       Top = 72
-      Width = 57
-      Height = 17
+      Width = 31
+      Height = 13
       Caption = 'Label4'
     end
   end

@@ -50,6 +50,11 @@ procedure TForm1.FormCreate(Sender: TObject);
 var
   S:string;
 begin
+  //фон
+   Brush.Bitmap := TBitMap.Create;
+   Brush.Bitmap.LoadFromFile('im\Fon.bmp');
+
+
    S:=ExtractFilePath(Application.ExeName);
    img1.Picture.LoadFromFile(s+'im\1.jpg');
  //  wall0.Picture.LoadFromFile(s+'im\wall0.jpg');
