@@ -22,7 +22,8 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    wall0: TImage;
+    wall1: TImage;
+    Label5: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
@@ -30,7 +31,7 @@ type
     procedure btn6Click(Sender: TObject);
     procedure btn4Click(Sender: TObject);
   private
-    { Private declarations }
+    function checkBarrier(x, y, q:integer): Boolean;
   public
     { Public declarations }
   end;
@@ -42,7 +43,7 @@ implementation
 
 var
   x,y:array [1..2] of Byte;
- // xwall,ywall:array [1..2] of Byte;
+  xwall,ywall:array [1..2] of Byte;
 
 {$R *.dfm}
 
@@ -53,14 +54,15 @@ begin
   //фон
    Brush.Bitmap := TBitMap.Create;
    Brush.Bitmap.LoadFromFile('im\Fon.bmp');
-
-
    S:=ExtractFilePath(Application.ExeName);
    img1.Picture.LoadFromFile(s+'im\1.jpg');
- //  wall0.Picture.LoadFromFile(s+'im\wall0.jpg');
+   img2.Picture.LoadFromFile(s+'im\hero.jpg');
+   wall1.Picture.LoadFromFile(s+'im\wall1.jpg');
+   img2.Top := img1.Height div 2;
+   img2.Left := img1.Width div 2;
    x[1]:=img2.Left div 10;
    y[1]:=img2.Top div 10;
-   Label1.Caption:='Left:';
+        Label1.Caption:='Left:';
         Label2.Caption:='Top:';
         Label1.Caption:=Label1.Caption+IntToStr(img2.left);
         Label2.Caption:=Label2.Caption+IntToStr(img2.top);
@@ -74,26 +76,34 @@ end;
 
 
 procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
+var a:Boolean;
 begin
   case key of
   'W','w', 'Ц', 'ц':
-      begin
-        if y[1]<>0 then
+  begin
+        a := checkBarrier(img2.Left, img2.Top, 1 );
+        if (a) then
+        begin
+          if y[1]<>0 then
           begin
             img2.Top:=img2.Top - 10;
             y[1]:=y[1]-1;
           end;
-
-        Label1.Caption:='Left:';
-        Label2.Caption:='Top:';
-        Label1.Caption:=Label1.Caption+IntToStr(img2.left);
-        Label2.Caption:=Label2.Caption+IntToStr(img2.top);
-        Label3.Caption:='X:';
-        Label4.Caption:='Y:';
-        Label3.Caption:=Label3.Caption+IntToStr(x[1]);
-        Label4.Caption:=Label4.Caption+IntToStr(y[1]);
-      end;
+          Label1.Caption :='Left:';
+          Label2.Caption :='Top:';
+          Label1.Caption := Label1.Caption + IntToStr(img2.left);
+          Label2.Caption := Label2.Caption + IntToStr(img2.top);
+          Label3.Caption :='X:';
+          Label4.Caption :='Y:';
+          Label3.Caption := Label3.Caption + IntToStr(x[1]);
+          Label4.Caption := Label4.Caption + IntToStr(y[1]);
+       end;
+  end;
   'A','a', 'Ф', 'ф':
+  begin
+     // if ( (img2.Top > wall1.Top + wall1.Height) or (img2.Top + img2.Height < wall1.Top) ) or  ((img2.Left - 10 > wall1.Left + wall1.Width) or (img2.Left + img2.Width < wall1.Left + 1)) then
+     a := checkBarrier(img2.Left , img2.Top, 2 );
+     if(a) then
       begin
         if x[1]<>0 then
           begin
@@ -109,9 +119,14 @@ begin
         Label3.Caption:=Label3.Caption+IntToStr(x[1]);
         Label4.Caption:=Label4.Caption+IntToStr(y[1]);
       end;
+  end;
   'S','s', 'Ы', 'ы':
+  begin
+    //  if ( (img2.Top > wall1.Top + wall1.Height) or (img2.Top + 10 + img2.Height < wall1.Top) ) or  ((img2.Left > wall1.Left + wall1.Width) or (img2.Left + img2.Width < wall1.Left + 1)) then
+    a := checkBarrier(img2.Left , img2.Top, 3 );
+    if(a) then
       begin
-      if y[1]<>33 then
+        if y[1]<>33 then
           begin
             img2.Top:=img2.Top + 10;
             y[1]:=y[1]+1;
@@ -125,7 +140,12 @@ begin
         Label3.Caption:=Label3.Caption+IntToStr(x[1]);
         Label4.Caption:=Label4.Caption+IntToStr(y[1]);
       end;
+  end;
   'D','d', 'в', 'В':
+   begin
+    //  if ( (img2.Top > wall1.Top + wall1.Height) or (img2.Top + img2.Height < wall1.Top) ) or  ((img2.Left > wall1.Left + wall1.Width) or (img2.Left + img2.Width + 10 < wall1.Left)) then
+    a := checkBarrier(img2.Left , img2.Top, 4 );
+    if(a) then
       begin
         if x[1]<>65 then
           begin
@@ -141,9 +161,9 @@ begin
         Label3.Caption:=Label3.Caption+IntToStr(x[1]);
         Label4.Caption:=Label4.Caption+IntToStr(y[1]);
       end;
+    end;
   end;
   Form1.Refresh;
-
 end;
 
 
@@ -184,6 +204,20 @@ begin
             img2.Left:=img2.Left - 10;
             x[1]:=x[1]-1;
           end;
+end;
+
+function TForm1.checkBarrier(x, y, q: integer): Boolean;
+begin
+  case q of
+    1:
+      result := (y - 10> wall1.Top + wall1.Height) or (y + img2.Height < wall1.Top)  or  (x  > wall1.Left + wall1.Width) or (x + img2.Width < wall1.Left);
+    2:
+      result := (img2.Top > wall1.Top + wall1.Height) or (img2.Top + img2.Height < wall1.Top) or  (img2.Left - 10 > wall1.Left + wall1.Width) or (img2.Left + img2.Width < wall1.Left + 1);
+    3:
+      result := (img2.Top > wall1.Top + wall1.Height) or (img2.Top + 10 + img2.Height < wall1.Top) or  (img2.Left > wall1.Left + wall1.Width) or (img2.Left + img2.Width < wall1.Left + 1);
+    4:
+      result := (img2.Top > wall1.Top + wall1.Height) or (img2.Top + img2.Height < wall1.Top) or  (img2.Left > wall1.Left + wall1.Width) or (img2.Left + img2.Width + 10 < wall1.Left);
+  end;
 end;
 
 end.
