@@ -24,6 +24,7 @@ type
     Label4: TLabel;
     wall1: TImage;
     Label5: TLabel;
+    forest1: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
@@ -43,7 +44,7 @@ implementation
 
 var
   x,y:array [1..2] of Byte;
-  xwall,ywall:array [1..2] of Byte;
+//  xwall,ywall:array [1..2] of Byte;
 
 {$R *.dfm}
 
@@ -58,6 +59,7 @@ begin
    img1.Picture.LoadFromFile(s+'im\1.jpg');
    img2.Picture.LoadFromFile(s+'im\hero.jpg');
    wall1.Picture.LoadFromFile(s+'im\wall1.jpg');
+   forest1.Picture.LoadFromFile(s+'im\forest1.jpg');
    img2.Top := img1.Height div 2;
    img2.Left := img1.Width div 2;
    x[1]:=img2.Left div 10;
@@ -210,13 +212,45 @@ function TForm1.checkBarrier(x, y, q: integer): Boolean;
 begin
   case q of
     1:
-      result := (y - 10> wall1.Top + wall1.Height) or (y + img2.Height < wall1.Top)  or  (x  > wall1.Left + wall1.Width) or (x + img2.Width < wall1.Left);
+    begin
+      if ((y - 10> forest1.Top + forest1.Height) or (y + img2.Height < forest1.Top)  or  (x  > forest1.Left + forest1.Width) or (x + img2.Width < forest1.Left)) then
+         if ( (y - 10> wall1.Top + wall1.Height) or (y + img2.Height < wall1.Top)  or  (x  > wall1.Left + wall1.Width) or (x + img2.Width < wall1.Left) ) then
+         begin
+            result := True;
+            Exit;
+         end;
+      result := False;
+    end;
     2:
-      result := (img2.Top > wall1.Top + wall1.Height) or (img2.Top + img2.Height < wall1.Top) or  (img2.Left - 10 > wall1.Left + wall1.Width) or (img2.Left + img2.Width < wall1.Left + 1);
+    begin
+      if ( (img2.Top > wall1.Top + wall1.Height) or (img2.Top + img2.Height < wall1.Top) or  (img2.Left - 10 > wall1.Left + wall1.Width) or (img2.Left + img2.Width < wall1.Left + 1) ) then
+        if ( (y > forest1.Top + forest1.Height) or (y + img2.Height < forest1.Top)  or  (x - 10  > forest1.Left + forest1.Width) or (x + img2.Width < forest1.Left +1) ) then
+        begin
+            result := True;
+            Exit;
+         end;
+      result := False;
+    end;
     3:
-      result := (img2.Top > wall1.Top + wall1.Height) or (img2.Top + 10 + img2.Height < wall1.Top) or  (img2.Left > wall1.Left + wall1.Width) or (img2.Left + img2.Width < wall1.Left + 1);
+    begin
+      if ( (img2.Top > wall1.Top + wall1.Height) or (img2.Top + 10 + img2.Height < wall1.Top) or  (img2.Left > wall1.Left + wall1.Width) or (img2.Left + img2.Width < wall1.Left + 1) ) then
+        if (  (y > forest1.Top + forest1.Height) or (y + img2.Height + 10 < forest1.Top)  or  (x  > forest1.Left + forest1.Width) or (x + img2.Width < forest1.Left +1) ) then
+        begin
+            result := True;
+            Exit;
+         end;
+      result := False;
+    end;
     4:
-      result := (img2.Top > wall1.Top + wall1.Height) or (img2.Top + img2.Height < wall1.Top) or  (img2.Left > wall1.Left + wall1.Width) or (img2.Left + img2.Width + 10 < wall1.Left);
+    begin
+      if ( (img2.Top > wall1.Top + wall1.Height) or (img2.Top + img2.Height < wall1.Top) or  (img2.Left > wall1.Left + wall1.Width) or (img2.Left + img2.Width + 10 < wall1.Left) ) then
+        if ( (y > forest1.Top + forest1.Height) or (y + img2.Height < forest1.Top)  or  (x  > forest1.Left + forest1.Width) or (x + img2.Width + 10 < forest1.Left ) ) then
+          begin
+            result := True;
+            Exit;
+         end;
+      result := False;
+    end;
   end;
 end;
 
