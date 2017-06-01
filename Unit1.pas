@@ -58,11 +58,11 @@ begin
    Brush.Bitmap := TBitMap.Create;
    Brush.Bitmap.LoadFromFile('im\Fon.bmp');
    S:=ExtractFilePath(Application.ExeName);
-   img1.Picture.LoadFromFile(s+'im\1.jpg');
+   img1.Picture.LoadFromFile(s+'im\location1.jpg');
    img2.Picture.LoadFromFile(s+'im\hero.jpg');
    wall1.Picture.LoadFromFile(s+'im\wall1.jpg');
    forest1.Picture.LoadFromFile(s+'im\forest1.jpg');
-   forest1d2.Picture.LoadFromFile(s+'im\forest1.jpg');
+   forest1d2.Picture.LoadFromFile(s+'im\location1.jpg');
    forest1d3.Picture.LoadFromFile(s+'im\forest1.jpg');
    img2.Top := img1.Height div 2;
    img2.Left := img1.Width div 2;
@@ -219,6 +219,8 @@ begin
     begin
       if ((y - 10> forest1.Top + forest1.Height) or (y + img2.Height < forest1.Top)  or  (x  > forest1.Left + forest1.Width) or (x + img2.Width < forest1.Left)) then
          if ( (y - 10> wall1.Top + wall1.Height) or (y + img2.Height < wall1.Top)  or  (x  > wall1.Left + wall1.Width) or (x + img2.Width < wall1.Left) ) then
+           if ((y - 10> forest1d2.Top + forest1d2.Height) or (y + img2.Height < forest1d2.Top)  or  (x  > forest1d2.Left + forest1d2.Width) or (x + img2.Width < forest1d2.Left)) then
+              if ((y - 10> forest1d3.Top + forest1d3.Height) or (y + img2.Height < forest1d3.Top)  or  (x  > forest1d3.Left + forest1d3.Width) or (x + img2.Width < forest1d3.Left)) then
          begin
             result := True;
             Exit;
@@ -229,6 +231,8 @@ begin
     begin
       if ( (y > wall1.Top + wall1.Height) or (y + img2.Height < wall1.Top) or  (x - 10 > wall1.Left + wall1.Width) or (x + img2.Width < wall1.Left + 1) ) then
         if ( (y > forest1.Top + forest1.Height) or (y + img2.Height < forest1.Top)  or  (x - 10  > forest1.Left + forest1.Width) or (x + img2.Width < forest1.Left +1) ) then
+          if ( (y > forest1d2.Top + forest1d2.Height) or (y + img2.Height < forest1d2.Top)  or  (x - 10  > forest1d2.Left + forest1d2.Width) or (x + img2.Width < forest1d2.Left +1) ) then
+            if ( (y > forest1d3.Top + forest1d3.Height) or (y + img2.Height < forest1d3.Top)  or  (x - 10  > forest1d3.Left + forest1d3.Width) or (x + img2.Width < forest1d3.Left +1) ) then
         begin
             result := True;
             Exit;
@@ -239,7 +243,9 @@ begin
     begin
       if ( (y > wall1.Top + wall1.Height) or (y + 10 + img2.Height < wall1.Top) or  (x > wall1.Left + wall1.Width) or (x + img2.Width < wall1.Left + 1) ) then
         if (  (y > forest1.Top + forest1.Height) or (y + img2.Height + 10 < forest1.Top)  or  (x  > forest1.Left + forest1.Width) or (x + img2.Width < forest1.Left +1) ) then
-        begin
+          if (  (y > forest1d2.Top + forest1d2.Height) or (y + img2.Height + 10 < forest1d2.Top)  or  (x  > forest1d2.Left + forest1d2.Width) or (x + img2.Width < forest1d2.Left +1) ) then
+            if (  (y > forest1d3.Top + forest1d3.Height) or (y + img2.Height + 10 < forest1d3.Top)  or  (x  > forest1d3.Left + forest1d3.Width) or (x + img2.Width < forest1d3.Left +1) ) then
+         begin
             result := True;
             Exit;
          end;
