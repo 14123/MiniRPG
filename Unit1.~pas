@@ -25,6 +25,8 @@ type
     wall1: TImage;
     Label5: TLabel;
     forest1: TImage;
+    forest1d2: TImage;
+    forest1d3: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
@@ -60,6 +62,8 @@ begin
    img2.Picture.LoadFromFile(s+'im\hero.jpg');
    wall1.Picture.LoadFromFile(s+'im\wall1.jpg');
    forest1.Picture.LoadFromFile(s+'im\forest1.jpg');
+   forest1d2.Picture.LoadFromFile(s+'im\forest1.jpg');
+   forest1d3.Picture.LoadFromFile(s+'im\forest1.jpg');
    img2.Top := img1.Height div 2;
    img2.Left := img1.Width div 2;
    x[1]:=img2.Left div 10;

@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 285
-  Top = 113
+  Left = 229
+  Top = 324
   Width = 928
   Height = 455
   Caption = 'Form1'
@@ -35,16 +35,28 @@ object Form1: TForm1
       Height = 70
     end
     object wall1: TImage
-      Left = 444
-      Top = 22
-      Width = 30
-      Height = 200
+      Left = 664
+      Top = 160
+      Width = 42
+      Height = 206
     end
     object forest1: TImage
       Left = 0
       Top = 0
       Width = 90
       Height = 400
+    end
+    object forest1d2: TImage
+      Left = 88
+      Top = 0
+      Width = 609
+      Height = 25
+    end
+    object forest1d3: TImage
+      Left = 88
+      Top = 368
+      Width = 609
+      Height = 33
     end
   end
   object pnl2: TPanel
@@ -83,8 +95,8 @@ object Form1: TForm1
     object Label5: TLabel
       Left = 24
       Top = 176
-      Width = 49
-      Height = 17
+      Width = 31
+      Height = 13
       Caption = 'Label5'
     end
   end
