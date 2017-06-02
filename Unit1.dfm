@@ -1,14 +1,6 @@
 object Form1: TForm1
-<<<<<<< HEAD
   Left = 292
   Top = 267
-||||||| merged common ancestors
-  Left = 210
-  Top = 250
-=======
-  Left = 258
-  Top = 250
->>>>>>> battle
   Width = 928
   Height = 455
   Caption = 'Form1'
@@ -70,7 +62,6 @@ object Form1: TForm1
       Width = 50
       Height = 70
     end
-<<<<<<< HEAD
     object wall1: TImage
       Left = 664
       Top = 160
@@ -96,15 +87,6 @@ object Form1: TForm1
       Height = 33
       Enabled = False
     end
-||||||| merged common ancestors
-    object wall0: TImage
-      Left = 370
-      Top = 30
-      Width = 30
-      Height = 200
-    end
-=======
->>>>>>> battle
   end
   object pnl2: TPanel
     Left = 712
@@ -198,14 +180,5 @@ object Form1: TForm1
     Caption = 'D'
     TabOrder = 7
     OnClick = btn6Click
-  end
-  object btn7: TButton
-    Left = 728
-    Top = 400
-    Width = 161
-    Height = 9
-    Caption = 'btn7'
-    TabOrder = 8
-    OnClick = btn7Click
   end
 end
