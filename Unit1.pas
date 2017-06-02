@@ -52,6 +52,7 @@ type
     Label9: TLabel;
     Label10: TLabel;
     Button10: TButton;
+    enemy3d1: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
@@ -110,6 +111,7 @@ begin
    location3.Picture.LoadFromFile(s+'im\location3.jpg');
    img2.Picture.LoadFromFile(s+'im\hero.jpg');
    npc2d1.Picture.LoadFromFile(s+'im\npc1.jpg');
+   enemy3d1.Picture.LoadFromFile(s+'im\enemy.bmp');
    sword1.Picture.LoadFromFile(s+'im\sword1.jpg');
    wall1.Picture.LoadFromFile(s+'im\wall1.jpg');
    forest1.Picture.LoadFromFile(s+'im\forest1.jpg');
@@ -474,6 +476,7 @@ begin
         location3.Visible := True;
         wall3d1.Visible := True;
         wall3d2.Visible := True;
+        enemy3d1.Visible := True;
         img2.Left := 100;
         x[1] := img2.Left div 10;
         setlocation := 3;
@@ -487,6 +490,7 @@ begin
         location3.Visible := False;
         wall3d1.Visible := False;
         wall3d2.Visible := False;
+        enemy3d1.Visible := False;
         location2.Visible := True;
         castle2d1.Visible := True;
         castle2d2.Visible := True;
@@ -531,6 +535,11 @@ begin
       end;
     end;
   end;
+  if (setlocation = 3) then
+    if (enemy3d1.Left - ( img2.Left + img2.Width) < 80) and (( abs( ( enemy3d1.Top + enemy3d1.Height ) - img2.Top) < 80  ) or ( abs( enemy3d1.Top - (img2.Top + img2.Height)) < 80  ) ) then
+    begin
+////      location3.Visible := False;
+    end;
 end;
 
 procedure TForm1.loadloc1();

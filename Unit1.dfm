@@ -163,7 +163,7 @@ object Form1: TForm1
     object Label7: TLabel
       Left = 328
       Top = 168
-      Width = 73
+      Width = 32
       Height = 13
       Caption = #1057#1080#1083#1072': '
       Visible = False
@@ -190,6 +190,13 @@ object Form1: TForm1
       Width = 96
       Height = 13
       Caption = #1054#1089#1090#1072#1074#1096#1080#1077#1089#1103' '#1086#1095#1082#1080': '
+    end
+    object enemy3d1: TImage
+      Left = 496
+      Top = 152
+      Width = 50
+      Height = 70
+      Visible = False
     end
     object ListBox1: TListBox
       Left = 144
