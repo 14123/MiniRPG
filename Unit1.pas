@@ -22,6 +22,7 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
+<<<<<<< HEAD
     wall1: TImage;
     Label5: TLabel;
     forest1: TImage;
@@ -31,12 +32,14 @@ type
     castle2d1: TImage;
     castle2d2: TImage;
     location3: TImage;
-    procedure FormCreate(Sender: TObject);
+    btn7: TButton;
+     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
     procedure btn5Click(Sender: TObject);
     procedure btn6Click(Sender: TObject);
     procedure btn4Click(Sender: TObject);
+    procedure btn7Click(Sender: TObject);
   private
     function checkBarrier1(x, y, q: integer): Boolean;
     function checkBarrier2(x, y, q: integer): Boolean;
@@ -46,9 +49,12 @@ type
   end;
 
 var
+  w:Boolean;
   Form1: TForm1;
 
 implementation
+
+uses Unit2;
 
 var
   x,y:array [1..2] of Byte;
@@ -64,7 +70,10 @@ begin
   //фон
    setlocation := 1;
    Brush.Bitmap := TBitMap.Create;
-   Brush.Bitmap.LoadFromFile('im\Fon.bmp');
+
+   Brush.Bitmap.LoadFromFile('im\fon.bmp');
+   w:=False;
+
    S:=ExtractFilePath(Application.ExeName);
    location1.Picture.LoadFromFile(s+'im\location1.jpg');
    location2.Picture.LoadFromFile(s+'im\location2.jpg'); 
@@ -236,6 +245,7 @@ begin
             x[1]:=x[1]-1;
           end;
 end;
+
 
 function TForm1.checkBarrier1(x, y, q: integer): Boolean;
 begin
@@ -409,5 +419,12 @@ begin
       end;
   end;
 end;
+
+
+procedure TForm1.btn7Click(Sender: TObject);
+begin
+  form2.Show;
+end;
+
 
 end.
