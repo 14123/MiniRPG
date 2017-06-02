@@ -20,19 +20,21 @@ type
     lbl2: TLabel;
     pb1: TProgressBar;
     pb2: TProgressBar;
+    img2: TImage;
     procedure FormCreate(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure btn3Click(Sender: TObject);
   private
-    { Private declarations }
+    procedure fight(att,attp:Integer);
   public
     { Public declarations }
   end;
 
 var
-  att,agi,str,Int,hp:Byte;
-  attp,agip,strp,intp,hpp:Byte;
+  att,agi,str,int:Byte;
+  attp,agip,strp,intp:Byte;
+  hpp,hp:Integer;
   Form2: TForm2;
 
 implementation
@@ -44,22 +46,38 @@ begin
   //фон
    Brush.Bitmap := TBitMap.Create;
    Brush.Bitmap.LoadFromFile('im\fon.bmp');
+   agip:=20;
+   strp:=20;
+   intp:=20;
    hp:=str*5;
    hpp:=strp*5;
    pb1.Max:=hp;
    pb2.Max:=hpp;
+
 end;
 
 function randomatt(): Byte ;
 begin
   Randomize;
-  attp:=1+Random(2);
+  attp:=1+Random(3);
   Result:=attp;
 end;
 
-function fight(att,attp:Integer): integer ;
+procedure TForm2.fight(att,attp:Integer);
 begin
-  
+  hp:=hp-attp;
+  hpp:=hpp-att;
+  att:=0;
+  attp:=0;
+  if (hpp<=0) then
+    begin
+      Form2.Close;
+    end;
+  if (hp<=0)then
+    begin
+      hp:=str*5;
+      hpp:=strp*5;
+    end;
 end;
 
 
@@ -80,7 +98,7 @@ begin
       begin
         attp:=2*str;
       end;
-
+  fight(att,attp);
 end;
 
 procedure TForm2.btn2Click(Sender: TObject);
@@ -100,6 +118,7 @@ begin
       begin
         attp:=str;
       end;
+  fight(att,attp);
 end;
 
 procedure TForm2.btn3Click(Sender: TObject);
@@ -119,6 +138,9 @@ begin
       begin
         attp:=2*agi;
       end;
+  fight(att,attp);
 end;
+
+
 
 end.
