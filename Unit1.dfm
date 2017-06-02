@@ -87,6 +87,43 @@ object Form1: TForm1
       Height = 33
       Enabled = False
     end
+    object door2d1: TImage
+      Left = 640
+      Top = 136
+      Width = 25
+      Height = 121
+      Visible = False
+    end
+    object npc2d1: TImage
+      Left = 600
+      Top = 192
+      Width = 25
+      Height = 35
+      Hint = '0'
+      Visible = False
+    end
+    object sword1: TImage
+      Left = 104
+      Top = 336
+      Width = 25
+      Height = 25
+      Visible = False
+    end
+    object Label1: TLabel
+      Left = 432
+      Top = 40
+      Width = 209
+      Height = 16
+      Caption = #1053#1072#1081#1076#1080' '#1084#1077#1095', '#1095#1090#1086#1073#1099' '#1074#1099#1078#1080#1090#1100' '#1074' '#1079#1072#1084#1082#1077'!'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+      Visible = False
+    end
   end
   object pnl2: TPanel
     Left = 712
@@ -94,12 +131,6 @@ object Form1: TForm1
     Width = 185
     Height = 265
     TabOrder = 1
-    object Label1: TLabel
-      Left = 40
-      Top = 16
-      Width = 3
-      Height = 13
-    end
     object Label2: TLabel
       Left = 104
       Top = 16

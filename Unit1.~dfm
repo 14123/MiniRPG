@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 371
-  Top = 115
+  Left = 292
+  Top = 267
   Width = 928
   Height = 455
   Caption = 'Form1'
@@ -22,6 +22,27 @@ object Form1: TForm1
     Width = 700
     Height = 400
     TabOrder = 0
+    object castle2d1: TImage
+      Left = 648
+      Top = 0
+      Width = 57
+      Height = 129
+      Visible = False
+    end
+    object castle2d2: TImage
+      Left = 648
+      Top = 272
+      Width = 57
+      Height = 129
+      Visible = False
+    end
+    object location3: TImage
+      Left = 0
+      Top = 0
+      Width = 705
+      Height = 401
+      Visible = False
+    end
     object location2: TImage
       Left = 0
       Top = 0
@@ -66,18 +87,41 @@ object Form1: TForm1
       Height = 33
       Enabled = False
     end
-    object castle2d1: TImage
-      Left = 648
-      Top = 0
-      Width = 57
-      Height = 129
+    object door2d1: TImage
+      Left = 640
+      Top = 136
+      Width = 25
+      Height = 121
       Visible = False
     end
-    object castle2d2: TImage
-      Left = 648
-      Top = 272
-      Width = 57
-      Height = 129
+    object npc2d1: TImage
+      Left = 600
+      Top = 192
+      Width = 25
+      Height = 35
+      Hint = '0'
+      Visible = False
+    end
+    object sword1: TImage
+      Left = 104
+      Top = 336
+      Width = 25
+      Height = 25
+      Visible = False
+    end
+    object Label1: TLabel
+      Left = 280
+      Top = 128
+      Width = 184
+      Height = 25
+      Caption = 'aaaaaaaaaaaa!!!!'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -21
+      Font.Name = 'Tahoma'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
       Visible = False
     end
   end
@@ -87,12 +131,6 @@ object Form1: TForm1
     Width = 185
     Height = 265
     TabOrder = 1
-    object Label1: TLabel
-      Left = 40
-      Top = 16
-      Width = 3
-      Height = 13
-    end
     object Label2: TLabel
       Left = 104
       Top = 16

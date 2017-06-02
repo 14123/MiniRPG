@@ -18,7 +18,6 @@ type
     btn4: TButton;
     btn5: TButton;
     btn6: TButton;
-    Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
@@ -31,6 +30,10 @@ type
     castle2d1: TImage;
     castle2d2: TImage;
     location3: TImage;
+    door2d1: TImage;
+    npc2d1: TImage;
+    sword1: TImage;
+    Label1: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
@@ -41,6 +44,7 @@ type
     function checkBarrier1(x, y, q: integer): Boolean;
     function checkBarrier2(x, y, q: integer): Boolean;
     procedure jumplevel();
+    procedure quest();
   public
     { Public declarations }
   end;
@@ -67,28 +71,22 @@ begin
    Brush.Bitmap.LoadFromFile('im\Fon.bmp');
    S:=ExtractFilePath(Application.ExeName);
    location1.Picture.LoadFromFile(s+'im\location1.jpg');
-   location2.Picture.LoadFromFile(s+'im\location2.jpg'); 
+   location2.Picture.LoadFromFile(s+'im\location2.jpg');
    location3.Picture.LoadFromFile(s+'im\location3.jpg');
    img2.Picture.LoadFromFile(s+'im\hero.jpg');
+   npc2d1.Picture.LoadFromFile(s+'im\npc1.jpg');
+   sword1.Picture.LoadFromFile(s+'im\sword1.jpg');
    wall1.Picture.LoadFromFile(s+'im\wall1.jpg');
    forest1.Picture.LoadFromFile(s+'im\forest1.jpg');
    forest1d2.Picture.LoadFromFile(s+'im\location1.jpg');
    forest1d3.Picture.LoadFromFile(s+'im\forest1.jpg');
    castle2d1.Picture.LoadFromFile(s+'im\castle1.jpg');
    castle2d2.Picture.LoadFromFile(s+'im\castle1.jpg');
+   door2d1.Picture.LoadFromFile(s+'im\wall1.jpg');
    img2.Top := location1.Height div 2;
    img2.Left := location1.Width div 2;
    x[1]:=img2.Left div 10;
    y[1]:=img2.Top div 10;
-        Label1.Caption:='Left:';
-        Label2.Caption:='Top:';
-        Label1.Caption:=Label1.Caption+IntToStr(img2.left);
-        Label2.Caption:=Label2.Caption+IntToStr(img2.top);
-        Label3.Caption:='X:';
-        Label4.Caption:='Y:';
-        Label3.Caption:=Label3.Caption+IntToStr(x[1]);
-        Label4.Caption:=Label4.Caption+IntToStr(y[1]);
-
 end;
 
 
@@ -110,15 +108,6 @@ begin
             img2.Top:=img2.Top - 10;
             y[1]:=y[1]-1;
           end;
-          Label1.Caption :='Left:';
-          Label2.Caption :='Top:';
-          Label1.Caption := Label1.Caption + IntToStr(img2.left);
-          Label2.Caption := Label2.Caption + IntToStr(img2.top);
-          Label3.Caption :='X:';
-          Label4.Caption :='Y:';
-          Label3.Caption := Label3.Caption + IntToStr(x[1]);
-          Label4.Caption := Label4.Caption + IntToStr(y[1]);
-          jumplevel();
        end;
   end;
   'A','a', 'Ô', 'ô':
@@ -134,15 +123,6 @@ begin
             img2.Left:=img2.Left - 10;
             x[1]:=x[1]-1;
           end;
-        Label1.Caption:='Left:';
-        Label2.Caption:='Top:';
-        Label1.Caption:=Label1.Caption+IntToStr(img2.left);
-        Label2.Caption:=Label2.Caption+IntToStr(img2.top);
-        Label3.Caption:='X:';
-        Label4.Caption:='Y:';
-        Label3.Caption:=Label3.Caption+IntToStr(x[1]);
-        Label4.Caption:=Label4.Caption+IntToStr(y[1]);
-        jumplevel();
       end;
   end;
   'S','s', 'Û', 'û':
@@ -158,15 +138,6 @@ begin
             img2.Top:=img2.Top + 10;
             y[1]:=y[1]+1;
           end;
-        Label1.Caption:='Left:';
-        Label2.Caption:='Top:';
-        Label1.Caption:=Label1.Caption+IntToStr(img2.left);
-        Label2.Caption:=Label2.Caption+IntToStr(img2.top);
-        Label3.Caption:='X:';
-        Label4.Caption:='Y:';
-        Label3.Caption:=Label3.Caption+IntToStr(x[1]);
-        Label4.Caption:=Label4.Caption+IntToStr(y[1]);
-        jumplevel();
       end;
   end;
   'D','d', 'â', 'Â':
@@ -182,18 +153,11 @@ begin
             img2.Left :=img2.Left + 10;
             x[1]:=x[1]+1;
           end;
-        Label1.Caption:='Left:';
-        Label2.Caption:='Top:';
-        Label1.Caption:=Label1.Caption+IntToStr(img2.left);
-        Label2.Caption:=Label2.Caption+IntToStr(img2.top);
-        Label3.Caption:='X:';
-        Label4.Caption:='Y:';
-        Label3.Caption:=Label3.Caption+IntToStr(x[1]);
-        Label4.Caption:=Label4.Caption+IntToStr(y[1]);
-        jumplevel();
       end;
     end;
   end;
+  jumplevel();
+  quest;
   Form1.Refresh;
 end;
 
@@ -302,6 +266,8 @@ begin
     begin
       if ((y - 10> castle2d1.Top + castle2d1.Height) or (y + img2.Height < castle2d1.Top)  or  (x  > castle2d1.Left + castle2d1.Width) or (x + img2.Width < castle2d1.Left)) then
          if ( (y - 10> castle2d2.Top + castle2d2.Height) or (y + img2.Height < castle2d2.Top)  or  (x  > castle2d2.Left + castle2d2.Width) or (x + img2.Width < castle2d2.Left) ) then
+          if (door2d1.Visible = false) or ( (y - 10> door2d1.Top + door2d1.Height) or (y + img2.Height < door2d1.Top)  or  (x  > door2d1.Left + door2d1.Width) or (x + img2.Width < door2d1.Left) ) then
+            if (npc2d1.Visible = false) or ( (y - 10> npc2d1.Top + npc2d1.Height) or (y + img2.Height < npc2d1.Top)  or  (x  > npc2d1.Left + npc2d1.Width) or (x + img2.Width < npc2d1.Left) ) then
          begin
             result := True;
             Exit;
@@ -313,6 +279,8 @@ begin
     begin
       if ( (y > castle2d1.Top + castle2d1.Height) or (y + img2.Height < castle2d1.Top) or  (x - 10 > castle2d1.Left + castle2d1.Width) or (x + img2.Width < castle2d1.Left + 1) ) then
         if ( (y > castle2d2.Top + castle2d2.Height) or (y + img2.Height < castle2d2.Top)  or  (x - 10  > castle2d2.Left + castle2d2.Width) or (x + img2.Width < castle2d2.Left +1) ) then
+          if (door2d1.Visible = false) or  ( (y > door2d1.Top + door2d1.Height) or (y + img2.Height < door2d1.Top)  or  (x - 10  > door2d1.Left + door2d1.Width) or (x + img2.Width < door2d1.Left +1) ) then
+            if (npc2d1.Visible = false) or ( (y > npc2d1.Top + npc2d1.Height) or (y + img2.Height < npc2d1.Top)  or  (x - 10  > npc2d1.Left + npc2d1.Width) or (x + img2.Width < npc2d1.Left +1) ) then
         begin
             result := True;
             Exit;
@@ -324,6 +292,8 @@ begin
     begin
       if ( (y > castle2d1.Top + castle2d1.Height) or (y + 10 + img2.Height < castle2d1.Top) or  (x > castle2d1.Left + castle2d1.Width) or (x + img2.Width < castle2d1.Left + 1) ) then
         if (  (y > castle2d2.Top + castle2d2.Height) or (y + img2.Height + 10 < castle2d2.Top)  or  (x  > castle2d2.Left + castle2d2.Width) or (x + img2.Width < castle2d2.Left +1) ) then
+          if  (door2d1.Visible = false) or (  (y > door2d1.Top + door2d1.Height) or (y + img2.Height + 10 < door2d1.Top)  or  (x  > door2d1.Left + door2d1.Width) or (x + img2.Width < door2d1.Left +1) )  then
+            if (npc2d1.Visible = false) or (  (y > npc2d1.Top + npc2d1.Height) or (y + img2.Height + 10 < npc2d1.Top)  or  (x  > npc2d1.Left + npc2d1.Width) or (x + img2.Width < npc2d1.Left +1) ) then
         begin
             result := True;
             Exit;
@@ -335,6 +305,8 @@ begin
     begin
       if ( (y > castle2d1.Top + castle2d1.Height) or (y + img2.Height < castle2d1.Top) or  (x > castle2d1.Left + castle2d1.Width) or (x + img2.Width + 10 < castle2d1.Left) ) then
         if ( (y > castle2d2.Top + castle2d2.Height) or (y + img2.Height < castle2d2.Top)  or  (x  > castle2d2.Left + castle2d2.Width) or (x + img2.Width + 10 < castle2d2.Left ) ) then
+          if (door2d1.Visible = false) or ( (y > door2d1.Top + door2d1.Height) or (y + img2.Height < door2d1.Top)  or  (x  > door2d1.Left + door2d1.Width) or (x + img2.Width + 10 < door2d1.Left ) ) then
+            if (npc2d1.Visible = false) or ( (y > npc2d1.Top + npc2d1.Height) or (y + img2.Height < npc2d1.Top)  or  (x  > npc2d1.Left + npc2d1.Width) or (x + img2.Width + 10 < npc2d1.Left ) ) then
         begin
             result := True;
             Exit;
@@ -345,7 +317,7 @@ begin
   end;
 end;
 
-procedure TForm1.jumplevel( );
+procedure TForm1.jumplevel();
 begin
   if (setlocation = 1) then
     if (img2.Left + (img2.Width div 2) > 664) then
@@ -356,9 +328,15 @@ begin
         forest1.Visible := False;
         forest1d2.Visible := False;
         forest1d3.Visible := False;
+        sword1.Visible := False;
         location2.Visible := True;
         castle2d1.Visible := True;
         castle2d2.Visible := True;
+        if (npc2d1.Hint <> '3') then
+        begin
+          npc2d1.Visible := True;
+          door2d1.Visible := True;
+        end;
         img2.Left := 100;
         x[1] := img2.Left div 10;
         location2.SendToBack;
@@ -374,10 +352,18 @@ begin
         location2.Visible := False;
         castle2d1.Visible := False;
         castle2d2.Visible := False;
+        door2d1.Visible := False;
+        if (npc2d1.Hint = '0') or (npc2d1.Hint = '1') or (npc2d1.Hint = '2') then
+          npc2d1.Visible := False;
         location1.Visible := True;
         wall1.Visible := True;
         forest1.Visible := True;
         forest1d2.Visible := True;
+        if (npc2d1.Hint = '1')  then
+        begin
+          Label1.Visible := False;
+          sword1.Visible := True;
+        end;
         img2.Left := 620;
         x[1] := img2.Left div 10;
         setlocation := 1;
@@ -388,6 +374,9 @@ begin
         location2.Visible := False;
         castle2d1.Visible := False;
         castle2d2.Visible := False;
+        door2d1.Visible := False;
+        if (npc2d1.Hint = '0') or (npc2d1.Hint = '1') or (npc2d1.Hint = '2') then
+          npc2d1.Visible := False;
         location3.Visible := True;
         img2.Left := 100;
         x[1] := img2.Left div 10;
@@ -403,11 +392,48 @@ begin
         location2.Visible := True;
         castle2d1.Visible := True;
         castle2d2.Visible := True;
+        if (npc2d1.Hint = '0') or (npc2d1.Hint = '1') or (npc2d1.Hint = '2') then
+          npc2d1.Visible := True;
         img2.Left := 600;
         x[1] := img2.Left div 10;
         setlocation := 2;
       end;
   end;
 end;
+
+procedure TForm1.quest();
+begin
+  if (npc2d1.Hint <> '3') then
+  begin
+    if (npc2d1.Hint = '1') then
+    if (img2.Top + img2.Height > sword1.Top) and (img2.Left < sword1.Left + sword1.Width) then
+    begin
+      sword1.Visible := False;
+      sword1.Hint := '1';
+      npc2d1.Hint := '2';
+    end;
+    if (setlocation = 2)  then
+    if (npc2d1.Left - ( img2.Left + img2.Width) < 50) and (( abs( ( npc2d1.Top + npc2d1.Height ) - img2.Top) < 50  ) or ( abs( npc2d1.Top - (img2.Top + img2.Height)) < 50  ) ) then
+    begin
+      if (npc2d1.Hint = '0') then
+      begin
+        Label1.BringToFront;
+        Label1.Visible := True;
+        npc2d1.Hint := '1';
+      end;
+      if (npc2d1.Hint = '2') then
+      begin
+        if (sword1.Hint = '1')then
+        begin
+          npc2d1.Hint := '3';
+          npc2d1.Visible := False;
+          door2d1.Visible := False;
+        end;
+      end;
+    end;
+  end;
+end;
+
+
 
 end.
