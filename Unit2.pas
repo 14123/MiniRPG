@@ -32,10 +32,11 @@ type
   end;
 
 var
-  att,agi,str,int:Byte;
+  att:Byte;
   attp,agip,strp,intp:Byte;
   hpp,hp:Integer;
   Form2: TForm2;
+  w:Boolean;
 
 
 implementation
@@ -52,7 +53,7 @@ begin
    agip:=20;
    strp:=20;
    intp:=20;
-   hp:=str*5;
+   hp:=Unit1.str*5;
    hpp:=strp*5;
    pb1.Max:=hp;
    pb2.Max:=hpp;
@@ -77,11 +78,12 @@ begin
   if (hpp<=0) then
     begin
       w:=True;
+      Form1.Enabled:=True;
       Form2.Close;
     end;
   if (hp<=0)then
     begin
-      hp:=str*5;
+      hp:=Unit1.str*5;
       hpp:=strp*5;
     end;
 end;
@@ -92,17 +94,17 @@ begin
   attp:=randomatt;
   if (attp<> 2)then
     begin
-      att:=agi;
+      att:=Unit1.agi;
     end;
     lbl2.Caption:=IntToStr(attp);
   if ((attp)=2)then
     if ((attp)=1)then
       begin
-        attp:=agi;
+        attp:=agip;
       end
     else
       begin
-        attp:=2*str;
+        attp:=2*strp;
       end;
   fight(att,attp);
 end;
@@ -112,17 +114,17 @@ begin
   attp:=randomatt;
   if (attp<> 3)then
     begin
-      att:=str;
+      att:=Unit1.str;
     end;
     lbl2.Caption:=IntToStr(attp);
   if ((attp)=2)then
     if ((attp)=3)then
       begin
-        attp:=2*agi;
+        attp:=2*agip;
       end
     else
       begin
-        attp:=str;
+        attp:=strp;
       end;
   fight(att,attp);
 end;
@@ -132,17 +134,17 @@ begin
   attp:=randomatt;
   if (attp<> 1)then
     begin
-      att:=int;
+      att:=Unit1.int;
     end;
     lbl2.Caption:=IntToStr(attp);
   if ((attp)=1)then
     if ((attp)=3)then
       begin
-        attp:=int;
+        attp:=intp;
       end
     else
       begin
-        attp:=2*agi;
+        attp:=2*agip;
       end;
   fight(att,attp);
 end;

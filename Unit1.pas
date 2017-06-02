@@ -84,16 +84,19 @@ type
 
 var
   Form1: TForm1;
+  int, agi, str: Byte;
 
 implementation
 
+uses Unit2;
 var
   x,y:array [1..2] of Byte;
   setlocation : integer;
-  int, agi, str, skills: Byte;
+  skills: Byte;
 //  xwall,ywall:array [1..2] of Byte;
 
 {$R *.dfm}
+
 
 
 
@@ -536,10 +539,12 @@ begin
     end;
   end;
   if (setlocation = 3) then
-    if (enemy3d1.Left - ( img2.Left + img2.Width) < 80) and (( abs( ( enemy3d1.Top + enemy3d1.Height ) - img2.Top) < 80  ) or ( abs( enemy3d1.Top - (img2.Top + img2.Height)) < 80  ) ) then
-    begin
-////      location3.Visible := False;
-    end;
+    if (enemy3d1.Left - ( img2.Left + img2.Width) < 50) and (( abs( ( enemy3d1.Top + enemy3d1.Height ) - img2.Top) < 80  ) or ( abs( enemy3d1.Top - (img2.Top + img2.Height)) < 80  ) ) then
+      begin
+        Form1.Enabled:=False;
+        form2.Show;
+        
+      end;
 end;
 
 procedure TForm1.loadloc1();
