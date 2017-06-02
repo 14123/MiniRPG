@@ -39,7 +39,7 @@ object Form1: TForm1
       Left = 384
       Top = 168
       Width = 50
-      Height = 72
+      Height = 70
     end
     object wall1: TImage
       Left = 664

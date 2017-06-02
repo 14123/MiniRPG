@@ -30,6 +30,7 @@ type
     location2: TImage;
     castle2d1: TImage;
     castle2d2: TImage;
+    location3: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
@@ -62,12 +63,12 @@ var
 begin
   //фон
    setlocation := 1;
-
    Brush.Bitmap := TBitMap.Create;
    Brush.Bitmap.LoadFromFile('im\Fon.bmp');
    S:=ExtractFilePath(Application.ExeName);
    location1.Picture.LoadFromFile(s+'im\location1.jpg');
-   location2.Picture.LoadFromFile(s+'im\location2.jpg');
+   location2.Picture.LoadFromFile(s+'im\location2.jpg'); 
+   location3.Picture.LoadFromFile(s+'im\location3.jpg');
    img2.Picture.LoadFromFile(s+'im\hero.jpg');
    wall1.Picture.LoadFromFile(s+'im\wall1.jpg');
    forest1.Picture.LoadFromFile(s+'im\forest1.jpg');
@@ -100,6 +101,8 @@ begin
   begin
         if (setlocation = 1) then
           a := checkBarrier1(img2.Left, img2.Top, 1 );
+        if (setlocation = 2) then
+          a := checkBarrier2(img2.Left, img2.Top, 1 );
         if (a) then
         begin
           if y[1]<>0 then
@@ -122,6 +125,8 @@ begin
   begin
      if (setlocation = 1) then
       a := checkBarrier1(img2.Left , img2.Top, 2 );
+     if (setlocation = 2) then
+      a := checkBarrier2(img2.Left, img2.Top, 2 );
      if(a) then
       begin
         if x[1]<>0 then
@@ -144,6 +149,8 @@ begin
   begin
     if (setlocation = 1) then
       a := checkBarrier1(img2.Left , img2.Top, 3 );
+    if (setlocation = 2) then
+      a := checkBarrier2(img2.Left, img2.Top, 3 );
     if(a) then
       begin
         if y[1]<>33 then
@@ -166,6 +173,8 @@ begin
    begin
     if (setlocation = 1) then
       a := checkBarrier1(img2.Left , img2.Top, 4 );
+    if (setlocation = 2) then
+      a := checkBarrier2(img2.Left, img2.Top, 4 );
     if(a) then
       begin
         if x[1]<>65 then
@@ -340,7 +349,7 @@ procedure TForm1.jumplevel( );
 begin
   if (setlocation = 1) then
     if (img2.Left + (img2.Width div 2) > 664) then
-      if (img2.Top < 160) then
+      if (img2.Top + img2.Height < wall1.Top) and (img2.Top > forest1d2.Top + forest1d2.Height) then
       begin
         location1.Visible := False;
         wall1.Visible := False;
@@ -350,13 +359,55 @@ begin
         location2.Visible := True;
         castle2d1.Visible := True;
         castle2d2.Visible := True;
-        img2.Left := 0;
-        x[1] := 0;
+        img2.Left := 100;
+        x[1] := img2.Left div 10;
         location2.SendToBack;
         castle2d1.BringToFront;
         castle2d2.BringToFront;
         setlocation := 2;
       end;
+  if (setlocation = 2) then
+  begin
+    if (img2.Left < 40) then
+      if (img2.Top + img2.Height < wall1.Top) and (img2.Top > forest1d2.Top + forest1d2.Height) then
+      begin
+        location2.Visible := False;
+        castle2d1.Visible := False;
+        castle2d2.Visible := False;
+        location1.Visible := True;
+        wall1.Visible := True;
+        forest1.Visible := True;
+        forest1d2.Visible := True;
+        img2.Left := 620;
+        x[1] := img2.Left div 10;
+        setlocation := 1;
+      end;
+    if (img2.Left + (img2.Width div 2) > 660) then
+      if (img2.Top + img2.Height < castle2d2.Top) and (img2.Top > castle2d1.Top + castle2d1.Height) then
+      begin
+        location2.Visible := False;
+        castle2d1.Visible := False;
+        castle2d2.Visible := False;
+        location3.Visible := True;
+        img2.Left := 100;
+        x[1] := img2.Left div 10;
+        setlocation := 3;
+      end;
+  end;
+  if (setlocation = 3) then
+  begin
+    if (img2.Left < 40) then
+      if (img2.Top + img2.Height < castle2d2.Top) and (img2.Top > castle2d1.Top + castle2d1.Height) then
+      begin
+        location3.Visible := false;
+        location2.Visible := True;
+        castle2d1.Visible := True;
+        castle2d2.Visible := True;
+        img2.Left := 600;
+        x[1] := img2.Left div 10;
+        setlocation := 2;
+      end;
+  end;
 end;
 
 end.

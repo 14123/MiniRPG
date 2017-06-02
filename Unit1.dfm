@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 371
-  Top = 115
+  Left = 292
+  Top = 267
   Width = 928
   Height = 455
   Caption = 'Form1'
@@ -22,6 +22,27 @@ object Form1: TForm1
     Width = 700
     Height = 400
     TabOrder = 0
+    object castle2d1: TImage
+      Left = 648
+      Top = 0
+      Width = 57
+      Height = 129
+      Visible = False
+    end
+    object castle2d2: TImage
+      Left = 648
+      Top = 272
+      Width = 57
+      Height = 129
+      Visible = False
+    end
+    object location3: TImage
+      Left = 0
+      Top = 0
+      Width = 705
+      Height = 401
+      Visible = False
+    end
     object location2: TImage
       Left = 0
       Top = 0
@@ -39,7 +60,7 @@ object Form1: TForm1
       Left = 384
       Top = 168
       Width = 50
-      Height = 72
+      Height = 70
     end
     object wall1: TImage
       Left = 664
@@ -65,20 +86,6 @@ object Form1: TForm1
       Width = 609
       Height = 33
       Enabled = False
-    end
-    object castle2d1: TImage
-      Left = 648
-      Top = 0
-      Width = 57
-      Height = 129
-      Visible = False
-    end
-    object castle2d2: TImage
-      Left = 648
-      Top = 272
-      Width = 57
-      Height = 129
-      Visible = False
     end
   end
   object pnl2: TPanel
