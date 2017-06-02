@@ -40,6 +40,18 @@ type
     ListBox1: TListBox;
     wall3d1: TImage;
     wall3d2: TImage;
+    Label6: TLabel;
+    Button4: TButton;
+    Button5: TButton;
+    Button6: TButton;
+    Button7: TButton;
+    Button8: TButton;
+    Button9: TButton;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label10: TLabel;
+    Button10: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
@@ -50,12 +62,21 @@ type
     procedure btn1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure Button8Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button7Click(Sender: TObject);
+    procedure Button9Click(Sender: TObject);
+    procedure Button10Click(Sender: TObject);
   private
     function checkBarrier1(x, y, q: integer): Boolean;
     function checkBarrier2(x, y, q: integer): Boolean;
     function checkBarrier3(x, y, q: integer): Boolean;
     procedure jumplevel();
     procedure quest();
+    procedure newhero();
+    procedure loadloc1();
   public
     { Public declarations }
   end;
@@ -68,6 +89,7 @@ implementation
 var
   x,y:array [1..2] of Byte;
   setlocation : integer;
+  int, agi, str, skills: Byte;
 //  xwall,ywall:array [1..2] of Byte;
 
 {$R *.dfm}
@@ -81,7 +103,7 @@ begin
   //фон
    setlocation := 1;
    Brush.Bitmap := TBitMap.Create;
-   Brush.Bitmap.LoadFromFile('im\Fon.bmp');
+   Brush.Bitmap.LoadFromFile('im\fon.bmp');
    S:=ExtractFilePath(Application.ExeName);
    location1.Picture.LoadFromFile(s+'im\location1.jpg');
    location2.Picture.LoadFromFile(s+'im\location2.jpg');
@@ -130,6 +152,8 @@ begin
       a := checkBarrier1(img2.Left , img2.Top, 2 );
      if (setlocation = 2) then
       a := checkBarrier2(img2.Left, img2.Top, 2 );
+      if (setlocation = 3) then
+          a := checkBarrier3(img2.Left, img2.Top, 2 );
      if(a) then
       begin
         if x[1]<>0 then
@@ -145,6 +169,8 @@ begin
       a := checkBarrier1(img2.Left , img2.Top, 3 );
     if (setlocation = 2) then
       a := checkBarrier2(img2.Left, img2.Top, 3 );
+      if (setlocation = 3) then
+          a := checkBarrier3(img2.Left, img2.Top, 3 );
     if(a) then
       begin
         if y[1]<>33 then
@@ -160,6 +186,8 @@ begin
       a := checkBarrier1(img2.Left , img2.Top, 4 );
     if (setlocation = 2) then
       a := checkBarrier2(img2.Left, img2.Top, 4 );
+    if (setlocation = 3) then
+      a := checkBarrier3(img2.Left, img2.Top, 4 );
     if(a) then
       begin
         if x[1]<>65 then
@@ -413,6 +441,7 @@ begin
     if (img2.Left < 40) then
       if (img2.Top + img2.Height < wall1.Top) and (img2.Top > forest1d2.Top + forest1d2.Height) then
       begin
+        Label6.Visible := False;
         location2.Visible := False;
         castle2d1.Visible := False;
         castle2d2.Visible := False;
@@ -435,6 +464,7 @@ begin
     if (img2.Left + (img2.Width div 2) > 660) then
       if (img2.Top + img2.Height < castle2d2.Top) and (img2.Top > castle2d1.Top + castle2d1.Height) then
       begin
+        Label6.Visible := False;
         location2.Visible := False;
         castle2d1.Visible := False;
         castle2d2.Visible := False;
@@ -496,15 +526,14 @@ begin
           npc2d1.Hint := '3';
           npc2d1.Visible := False;
           door2d1.Visible := False;
+          Label6.Visible := True;
         end;
       end;
     end;
   end;
 end;
 
-
-
-procedure TForm1.Button1Click(Sender: TObject);
+procedure TForm1.loadloc1();
 begin
   location1.Visible := True;
   forest1.Visible := True;
@@ -521,6 +550,22 @@ begin
   Button1.Visible := False;
   Button2.Visible := False;
   Button3.Visible := False;
+  Label7.Visible := False;
+  Label8.Visible := False;
+  Label9.Visible := False;
+  Label10.Visible := False;
+  Button4.Visible := False;
+  Button5.Visible := False;
+  Button6.Visible := False;
+  Button7.Visible := False;
+  Button8.Visible := False;
+  Button9.Visible := False;
+  Button10.Visible := False;
+end;
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  newhero();
 end;
 
 procedure TForm1.btn1Click(Sender: TObject);
@@ -528,6 +573,9 @@ begin
   ListBox1.Items.Clear;
   ListBox1.Items.Add(sword1.Hint);
   ListBox1.Items.Add(npc2d1.Hint);
+  ListBox1.Items.Add(IntToStr(str));
+  ListBox1.Items.Add(IntToStr(agi));
+  ListBox1.Items.Add(IntToStr(int));
   ListBox1.Items.SaveToFile('1.conf');
   Form1.Close;
 end;
@@ -539,7 +587,10 @@ begin
      ListBox1.Items.LoadFromFile('1.conf');
      sword1.Hint := ListBox1.Items[0];
      npc2d1.Hint := ListBox1.Items[1];
-     Button1Click(Sender);
+     str := StrToInt(ListBox1.Items[2]);
+     agi := StrToInt(ListBox1.Items[3]);
+     int := StrToInt(ListBox1.Items[4]);
+     loadloc1;
    end;
 end;
 
@@ -548,6 +599,102 @@ end;
 procedure TForm1.Button3Click(Sender: TObject);
 begin
   Form1.Close;
+end;
+
+procedure TForm1.newhero();
+begin
+  Button1.Visible := False;
+  Button2.Visible := False;
+  Button3.Visible := False;
+  Label7.Visible := True;
+  Label8.Visible := True;
+  Label9.Visible := True;
+  Button4.Visible := True;
+  Button5.Visible := True;
+  Button6.Visible := True;
+  Button7.Visible := True;
+  Button8.Visible := True;
+  Button9.Visible := True;
+  img2.Visible := True;
+  skills := 30;
+  str := 10;
+  agi := 10;
+  int := 10;
+  Label7.Caption := Label7.Caption + IntToStr(str);
+  Label8.Caption := Label8.Caption + IntToStr(agi);
+  Label9.Caption := Label9.Caption + IntToStr(int);
+  Label10.Caption := Label10.Caption + IntToStr(skills);
+end;
+
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+  if (str > 10) then
+  begin
+    str := str - 1;
+    skills := skills + 1;
+  end;
+  Label7.Caption := 'Сила: ' + IntToStr(str);
+  Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
+end;
+
+procedure TForm1.Button6Click(Sender: TObject);
+begin
+  if (agi > 10) then
+  begin
+    agi := agi - 1;
+    skills := skills + 1;
+  end;
+  Label8.Caption := 'Ловкость: ' + IntToStr(agi);
+  Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
+end;
+
+procedure TForm1.Button8Click(Sender: TObject);
+begin
+  if (int > 10) then
+  begin
+    int := int - 1;
+    skills := skills + 1;
+  end;
+  Label9.Caption := 'Интелект: ' + IntToStr(int);
+  Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
+end;
+
+procedure TForm1.Button5Click(Sender: TObject);
+begin
+  if (skills > 0) then
+  begin
+    str := str + 1;
+    skills := skills - 1;
+    Label7.Caption := 'Сила: ' + IntToStr(str);
+    Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
+  end;
+end;
+
+procedure TForm1.Button7Click(Sender: TObject);
+begin
+  if (skills > 0) then
+  begin
+    agi := agi + 1;
+    skills := skills - 1;
+    Label8.Caption := 'Ловкость: ' + IntToStr(agi);
+    Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
+  end;
+end;
+
+procedure TForm1.Button9Click(Sender: TObject);
+begin
+  if (skills > 0) then
+  begin
+    int := int + 1;
+    skills := skills - 1;
+    Label9.Caption := 'Интелект: ' + IntToStr(int);
+    Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
+  end;
+end;
+
+procedure TForm1.Button10Click(Sender: TObject);
+begin
+ loadloc1;
 end;
 
 end.

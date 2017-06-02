@@ -58,8 +58,8 @@ object Form1: TForm1
       Visible = False
     end
     object img2: TImage
-      Left = 384
-      Top = 168
+      Left = 336
+      Top = 16
       Width = 50
       Height = 70
       Visible = False
@@ -145,6 +145,52 @@ object Form1: TForm1
       Height = 113
       Visible = False
     end
+    object Label6: TLabel
+      Left = 592
+      Top = 136
+      Width = 39
+      Height = 16
+      Caption = #1059#1076#1072#1095#1080'!'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Transparent = True
+      Visible = False
+    end
+    object Label7: TLabel
+      Left = 328
+      Top = 168
+      Width = 73
+      Height = 13
+      Caption = #1057#1080#1083#1072': '
+      Visible = False
+    end
+    object Label8: TLabel
+      Left = 320
+      Top = 224
+      Width = 55
+      Height = 13
+      Caption = #1051#1086#1074#1082#1086#1089#1090#1100': '
+      Visible = False
+    end
+    object Label9: TLabel
+      Left = 320
+      Top = 264
+      Width = 56
+      Height = 13
+      Caption = #1048#1085#1090#1077#1083#1077#1082#1090': '
+      Visible = False
+    end
+    object Label10: TLabel
+      Left = 288
+      Top = 120
+      Width = 96
+      Height = 13
+      Caption = #1054#1089#1090#1072#1074#1096#1080#1077#1089#1103' '#1086#1095#1082#1080': '
+    end
     object ListBox1: TListBox
       Left = 144
       Top = 48
@@ -180,6 +226,75 @@ object Form1: TForm1
       Caption = #1042#1099#1093#1086#1076
       TabOrder = 2
       OnClick = Button3Click
+    end
+    object Button4: TButton
+      Left = 248
+      Top = 160
+      Width = 57
+      Height = 33
+      Caption = '-'
+      TabOrder = 4
+      Visible = False
+      OnClick = Button4Click
+    end
+    object Button5: TButton
+      Left = 400
+      Top = 160
+      Width = 57
+      Height = 33
+      Caption = '+'
+      TabOrder = 5
+      Visible = False
+      OnClick = Button5Click
+    end
+    object Button6: TButton
+      Left = 248
+      Top = 216
+      Width = 57
+      Height = 25
+      Caption = '-'
+      TabOrder = 6
+      Visible = False
+      OnClick = Button6Click
+    end
+    object Button7: TButton
+      Left = 400
+      Top = 216
+      Width = 57
+      Height = 25
+      Caption = '+'
+      TabOrder = 7
+      Visible = False
+      OnClick = Button7Click
+    end
+    object Button8: TButton
+      Left = 248
+      Top = 256
+      Width = 57
+      Height = 25
+      Caption = '-'
+      TabOrder = 8
+      Visible = False
+      OnClick = Button8Click
+    end
+    object Button9: TButton
+      Left = 400
+      Top = 256
+      Width = 57
+      Height = 25
+      Caption = '+'
+      TabOrder = 9
+      Visible = False
+      OnClick = Button9Click
+    end
+    object Button10: TButton
+      Left = 312
+      Top = 328
+      Width = 129
+      Height = 41
+      Caption = #1053#1072#1095#1072#1090#1100' '#1080#1075#1088#1091
+      TabOrder = 10
+      OnClick = Button10Click
     end
   end
   object pnl2: TPanel
