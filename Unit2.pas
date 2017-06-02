@@ -37,7 +37,10 @@ var
   hpp,hp:Integer;
   Form2: TForm2;
 
+
 implementation
+
+uses Unit1;
 
 {$R *.dfm}
 
@@ -66,11 +69,14 @@ end;
 procedure TForm2.fight(att,attp:Integer);
 begin
   hp:=hp-attp;
+  pb1.Position:=hp;
   hpp:=hpp-att;
+  pb2.Position:=hpp;
   att:=0;
   attp:=0;
   if (hpp<=0) then
     begin
+      w:=True;
       Form2.Close;
     end;
   if (hp<=0)then

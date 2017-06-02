@@ -37,6 +37,7 @@ type
   end;
 
 var
+  w:Boolean;
   Form1: TForm1;
 
 implementation
@@ -56,6 +57,7 @@ begin
   //фон
    Brush.Bitmap := TBitMap.Create;
    Brush.Bitmap.LoadFromFile('im\fon.bmp');
+   w:=False;
 
 
    S:=ExtractFilePath(Application.ExeName);
