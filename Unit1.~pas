@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, StdCtrls, jpeg;
+  Dialogs, ExtCtrls, StdCtrls, jpeg, ComCtrls;
 
 type
   TForm1 = class(TForm)
@@ -34,15 +34,26 @@ type
     npc2d1: TImage;
     sword1: TImage;
     Label1: TLabel;
+    Button1: TButton;
+    Button2: TButton;
+    Button3: TButton;
+    ListBox1: TListBox;
+    wall3d1: TImage;
+    wall3d2: TImage;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
     procedure btn5Click(Sender: TObject);
     procedure btn6Click(Sender: TObject);
     procedure btn4Click(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     function checkBarrier1(x, y, q: integer): Boolean;
     function checkBarrier2(x, y, q: integer): Boolean;
+    function checkBarrier3(x, y, q: integer): Boolean;
     procedure jumplevel();
     procedure quest();
   public
@@ -60,6 +71,8 @@ var
 //  xwall,ywall:array [1..2] of Byte;
 
 {$R *.dfm}
+
+
 
 procedure TForm1.FormCreate(Sender: TObject);
 var
@@ -83,10 +96,9 @@ begin
    castle2d1.Picture.LoadFromFile(s+'im\castle1.jpg');
    castle2d2.Picture.LoadFromFile(s+'im\castle1.jpg');
    door2d1.Picture.LoadFromFile(s+'im\wall1.jpg');
-   img2.Top := location1.Height div 2;
-   img2.Left := location1.Width div 2;
-   x[1]:=img2.Left div 10;
-   y[1]:=img2.Top div 10;
+   wall3d1.Picture.LoadFromFile(s+'im\wall1.jpg');
+   wall3d2.Picture.LoadFromFile(s+'im\wall1.jpg');
+
 end;
 
 
@@ -101,6 +113,8 @@ begin
           a := checkBarrier1(img2.Left, img2.Top, 1 );
         if (setlocation = 2) then
           a := checkBarrier2(img2.Left, img2.Top, 1 );
+        if (setlocation = 3) then
+          a := checkBarrier3(img2.Left, img2.Top, 1 );
         if (a) then
         begin
           if y[1]<>0 then
@@ -317,6 +331,56 @@ begin
   end;
 end;
 
+function TForm1.checkBarrier3(x, y, q: integer): Boolean;
+begin
+  case q of
+    1:
+    begin
+      if ((y - 10> wall3d1.Top + wall3d1.Height) or (y + img2.Height < wall3d1.Top)  or  (x  > wall3d1.Left + wall3d1.Width) or (x + img2.Width < wall3d1.Left)) then
+        if ((y - 10> wall3d2.Top + wall3d2.Height) or (y + img2.Height < wall3d2.Top)  or  (x  > wall3d2.Left + wall3d2.Width) or (x + img2.Width < wall3d2.Left)) then
+         begin
+            result := True;
+            Exit;
+         end;
+      result := False;
+      Exit;
+    end;
+    2:
+    begin
+      if ( (y > wall3d1.Top + wall3d1.Height) or (y + img2.Height < wall3d1.Top) or  (x - 10 > wall3d1.Left + wall3d1.Width) or (x + img2.Width < wall3d1.Left + 1) ) then
+        if ( (y > wall3d2.Top + wall3d2.Height) or (y + img2.Height < wall3d2.Top) or  (x - 10 > wall3d2.Left + wall3d2.Width) or (x + img2.Width < wall3d2.Left + 1) ) then
+        begin
+            result := True;
+            Exit;
+        end;
+      result := False;
+      Exit;
+    end;
+    3:
+    begin
+      if ( (y > wall3d1.Top + wall3d1.Height) or (y + 10 + img2.Height < wall3d1.Top) or  (x > wall3d1.Left + wall3d1.Width) or (x + img2.Width < wall3d1.Left + 1) ) then
+        if ( (y > wall3d2.Top + wall3d2.Height) or (y + 10 + img2.Height < wall3d2.Top) or  (x > wall3d2.Left + wall3d2.Width) or (x + img2.Width < wall3d2.Left + 1) ) then
+        begin
+            result := True;
+            Exit;
+        end;
+      result := False;
+      Exit;
+    end;
+    4:
+    begin
+      if ( (y > wall3d1.Top + wall3d1.Height) or (y + img2.Height < wall3d1.Top) or  (x > wall3d1.Left + wall3d1.Width) or (x + img2.Width + 10 < wall3d1.Left) ) then
+        if ( (y > wall3d2.Top + wall3d2.Height) or (y + img2.Height < wall3d2.Top) or  (x > wall3d2.Left + wall3d2.Width) or (x + img2.Width + 10 < wall3d2.Left) ) then
+        begin
+            result := True;
+            Exit;
+        end;
+      result := False;
+      Exit;
+    end;
+  end;
+end;
+
 procedure TForm1.jumplevel();
 begin
   if (setlocation = 1) then
@@ -332,9 +396,11 @@ begin
         location2.Visible := True;
         castle2d1.Visible := True;
         castle2d2.Visible := True;
-        door2d1.Visible := True;
         if (npc2d1.Hint <> '3') then
+        begin
           npc2d1.Visible := True;
+          door2d1.Visible := True;
+        end;
         img2.Left := 100;
         x[1] := img2.Left div 10;
         location2.SendToBack;
@@ -358,7 +424,10 @@ begin
         forest1.Visible := True;
         forest1d2.Visible := True;
         if (npc2d1.Hint = '1')  then
+        begin
+          Label1.Visible := False;
           sword1.Visible := True;
+        end;
         img2.Left := 620;
         x[1] := img2.Left div 10;
         setlocation := 1;
@@ -373,6 +442,8 @@ begin
         if (npc2d1.Hint = '0') or (npc2d1.Hint = '1') or (npc2d1.Hint = '2') then
           npc2d1.Visible := False;
         location3.Visible := True;
+        wall3d1.Visible := True;
+        wall3d2.Visible := True;
         img2.Left := 100;
         x[1] := img2.Left div 10;
         setlocation := 3;
@@ -383,7 +454,9 @@ begin
     if (img2.Left < 40) then
       if (img2.Top + img2.Height < castle2d2.Top) and (img2.Top > castle2d1.Top + castle2d1.Height) then
       begin
-        location3.Visible := false;
+        location3.Visible := False;
+        wall3d1.Visible := False;
+        wall3d2.Visible := False;
         location2.Visible := True;
         castle2d1.Visible := True;
         castle2d2.Visible := True;
@@ -414,10 +487,7 @@ begin
       begin
         Label1.BringToFront;
         Label1.Visible := True;
-
         npc2d1.Hint := '1';
-        sleep(2000);
-       // Label1.Visible := False;
       end;
       if (npc2d1.Hint = '2') then
       begin
@@ -433,5 +503,51 @@ begin
 end;
 
 
+
+procedure TForm1.Button1Click(Sender: TObject);
+begin
+  location1.Visible := True;
+  forest1.Visible := True;
+  forest1d2.Visible := True;
+  forest1d3.Visible := True;
+  wall1.Visible := True;
+  if (npc2d1.Hint = '1') then
+    sword1.Visible := True;
+  img2.Visible := True;
+  img2.Top := location1.Height div 2;
+  img2.Left := location1.Width div 2;
+  x[1]:=img2.Left div 10;
+  y[1]:=img2.Top div 10;
+  Button1.Visible := False;
+  Button2.Visible := False;
+  Button3.Visible := False;
+end;
+
+procedure TForm1.btn1Click(Sender: TObject);
+begin
+  ListBox1.Items.Clear;
+  ListBox1.Items.Add(sword1.Hint);
+  ListBox1.Items.Add(npc2d1.Hint);
+  ListBox1.Items.SaveToFile('1.conf');
+  Form1.Close;
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+ if FileExists('1.conf') then
+   begin
+     ListBox1.Items.LoadFromFile('1.conf');
+     sword1.Hint := ListBox1.Items[0];
+     npc2d1.Hint := ListBox1.Items[1];
+     Button1Click(Sender);
+   end;
+end;
+
+
+
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+  Form1.Close;
+end;
 
 end.
