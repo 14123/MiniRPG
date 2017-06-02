@@ -4,21 +4,26 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ExtCtrls, jpeg;
+  Dialogs, StdCtrls, Buttons, ExtCtrls, jpeg, Gauges, ComCtrls;
 
 type
   TForm2 = class(TForm)
     img1: TImage;
-    img2: TImage;
-    img3: TImage;
-    img4: TImage;
-    img5: TImage;
     btn1: TBitBtn;
     btn2: TBitBtn;
     btn3: TBitBtn;
     btn4: TBitBtn;
     btn5: TBitBtn;
     btn6: TBitBtn;
+    img6: TImage;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    pb1: TProgressBar;
+    pb2: TProgressBar;
+    procedure FormCreate(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
+    procedure btn3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -26,10 +31,94 @@ type
   end;
 
 var
+  att,agi,str,Int,hp:Byte;
+  attp,agip,strp,intp,hpp:Byte;
   Form2: TForm2;
 
 implementation
 
 {$R *.dfm}
+
+procedure TForm2.FormCreate(Sender: TObject);
+begin
+  //фон
+   Brush.Bitmap := TBitMap.Create;
+   Brush.Bitmap.LoadFromFile('im\fon.bmp');
+   hp:=str*5;
+   hpp:=strp*5;
+   pb1.Max:=hp;
+   pb2.Max:=hpp;
+end;
+
+function randomatt(): Byte ;
+begin
+  Randomize;
+  attp:=1+Random(2);
+  Result:=attp;
+end;
+
+function fight(att,attp:Integer): integer ;
+begin
+  
+end;
+
+
+procedure TForm2.btn1Click(Sender: TObject);
+begin
+  attp:=randomatt;
+  if (attp<> 2)then
+    begin
+      att:=agi;
+    end;
+    lbl2.Caption:=IntToStr(attp);
+  if ((attp)=2)then
+    if ((attp)=1)then
+      begin
+        attp:=agi;
+      end
+    else
+      begin
+        attp:=2*str;
+      end;
+
+end;
+
+procedure TForm2.btn2Click(Sender: TObject);
+begin
+  attp:=randomatt;
+  if (attp<> 3)then
+    begin
+      att:=str;
+    end;
+    lbl2.Caption:=IntToStr(attp);
+  if ((attp)=2)then
+    if ((attp)=3)then
+      begin
+        attp:=2*agi;
+      end
+    else
+      begin
+        attp:=str;
+      end;
+end;
+
+procedure TForm2.btn3Click(Sender: TObject);
+begin
+  attp:=randomatt;
+  if (attp<> 1)then
+    begin
+      att:=int;
+    end;
+    lbl2.Caption:=IntToStr(attp);
+  if ((attp)=1)then
+    if ((attp)=3)then
+      begin
+        attp:=int;
+      end
+    else
+      begin
+        attp:=2*agi;
+      end;
+end;
 
 end.

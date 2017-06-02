@@ -22,13 +22,14 @@ type
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    wall0: TImage;
+    btn7: TButton;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
     procedure btn5Click(Sender: TObject);
     procedure btn6Click(Sender: TObject);
     procedure btn4Click(Sender: TObject);
+    procedure btn7Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,6 +40,8 @@ var
   Form1: TForm1;
 
 implementation
+
+uses Unit2;
 
 var
   x,y:array [1..2] of Byte;
@@ -52,7 +55,7 @@ var
 begin
   //фон
    Brush.Bitmap := TBitMap.Create;
-   Brush.Bitmap.LoadFromFile('im\Fon.bmp');
+   Brush.Bitmap.LoadFromFile('im\fon.bmp');
 
 
    S:=ExtractFilePath(Application.ExeName);
@@ -184,6 +187,11 @@ begin
             img2.Left:=img2.Left - 10;
             x[1]:=x[1]-1;
           end;
+end;
+
+procedure TForm1.btn7Click(Sender: TObject);
+begin
+  form2.Show;
 end;
 
 end.

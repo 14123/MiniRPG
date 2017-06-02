@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 210
-  Top = 250
+  Left = 252
+  Top = 183
   Width = 928
   Height = 455
   Caption = 'Form1'
@@ -148,12 +148,6 @@ object Form1: TForm1
         659FCCB6328DEE58659C3B001BA7D28A2B0AB8A9D48284ADA7DFF79D987CB695
         0ACEB53BDDAB5AFA795979743F7428A28AE63D03FFD9}
     end
-    object wall0: TImage
-      Left = 370
-      Top = 30
-      Width = 30
-      Height = 200
-    end
   end
   object pnl2: TPanel
     Left = 712
@@ -240,5 +234,14 @@ object Form1: TForm1
     Caption = 'D'
     TabOrder = 7
     OnClick = btn6Click
+  end
+  object btn7: TButton
+    Left = 728
+    Top = 400
+    Width = 161
+    Height = 9
+    Caption = 'btn7'
+    TabOrder = 8
+    OnClick = btn7Click
   end
 end
