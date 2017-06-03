@@ -18,9 +18,9 @@ type
     img6: TImage;
     lbl1: TLabel;
     lbl2: TLabel;
-    pb1: TProgressBar;
     pb2: TProgressBar;
     img2: TImage;
+    pb1: TProgressBar;
     procedure FormCreate(Sender: TObject);
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
@@ -28,7 +28,7 @@ type
   private
     procedure fight(att,attp:Integer);
   public
-    { Public declarations }
+    procedure newfight();
   end;
 
 var
@@ -53,11 +53,14 @@ begin
    agip:=20;
    strp:=20;
    intp:=20;
-   hp:=Unit1.str*5;
+end;
+
+procedure TForm2.newfight();
+begin
+   hp:=Form1.str*5;
    hpp:=strp*5;
    pb1.Max:=hp;
    pb2.Max:=hpp;
-
 end;
 
 function randomatt(): Byte ;
@@ -80,10 +83,11 @@ begin
       w:=True;
       Form1.Enabled:=True;
       Form2.Close;
+      Form1.enemy3d1.Visible:=False;
     end;
   if (hp<=0)then
     begin
-      hp:=Unit1.str*5;
+      hp:=Form1.str*5;
       hpp:=strp*5;
     end;
 end;
@@ -94,7 +98,7 @@ begin
   attp:=randomatt;
   if (attp<> 2)then
     begin
-      att:=Unit1.agi;
+      att:=form1.agi;
     end;
     lbl2.Caption:=IntToStr(attp);
   if ((attp)=2)then
@@ -114,7 +118,7 @@ begin
   attp:=randomatt;
   if (attp<> 3)then
     begin
-      att:=Unit1.str;
+      att:=form1.str;
     end;
     lbl2.Caption:=IntToStr(attp);
   if ((attp)=2)then
@@ -134,7 +138,7 @@ begin
   attp:=randomatt;
   if (attp<> 1)then
     begin
-      att:=Unit1.int;
+      att:=form1.int;
     end;
     lbl2.Caption:=IntToStr(attp);
   if ((attp)=1)then

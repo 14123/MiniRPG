@@ -79,16 +79,18 @@ type
     procedure newhero();
     procedure loadloc1();
   public
-    { Public declarations }
+    int, agi, str: integer;
   end;
 
 var
   Form1: TForm1;
-  int, agi, str: Byte;
+
 
 implementation
 
 uses Unit2;
+
+
 var
   x,y:array [1..2] of Byte;
   setlocation : integer;
@@ -96,6 +98,7 @@ var
 //  xwall,ywall:array [1..2] of Byte;
 
 {$R *.dfm}
+
 
 
 
@@ -109,17 +112,17 @@ begin
    Brush.Bitmap := TBitMap.Create;
    Brush.Bitmap.LoadFromFile('im\fon.bmp');
    S:=ExtractFilePath(Application.ExeName);
-   location1.Picture.LoadFromFile(s+'im\location1.jpg');
-   location2.Picture.LoadFromFile(s+'im\location2.jpg');
+   location1.Picture.LoadFromFile(s+'im\forest1.jpg');
+   location2.Picture.LoadFromFile(s+'im\location2.bmp');
    location3.Picture.LoadFromFile(s+'im\location3.jpg');
    img2.Picture.LoadFromFile(s+'im\hero.jpg');
    npc2d1.Picture.LoadFromFile(s+'im\npc1.jpg');
    enemy3d1.Picture.LoadFromFile(s+'im\enemy.bmp');
    sword1.Picture.LoadFromFile(s+'im\sword1.jpg');
-   wall1.Picture.LoadFromFile(s+'im\wall1.jpg');
-   forest1.Picture.LoadFromFile(s+'im\forest1.jpg');
-   forest1d2.Picture.LoadFromFile(s+'im\location1.jpg');
-   forest1d3.Picture.LoadFromFile(s+'im\forest1.jpg');
+   //wall1.Picture.LoadFromFile(s+'im\wall1.jpg');
+   //forest1.Picture.LoadFromFile(s+'im\forest1.jpg');
+   //forest1d2.Picture.LoadFromFile(s+'im\location1.jpg');
+   //forest1d3.Picture.LoadFromFile(s+'im\forest1.jpg');
    castle2d1.Picture.LoadFromFile(s+'im\castle1.jpg');
    castle2d2.Picture.LoadFromFile(s+'im\castle1.jpg');
    door2d1.Picture.LoadFromFile(s+'im\wall1.jpg');
@@ -418,7 +421,7 @@ procedure TForm1.jumplevel();
 begin
   if (setlocation = 1) then
     if (img2.Left + (img2.Width div 2) > 664) then
-      if (img2.Top + img2.Height < wall1.Top) and (img2.Top > forest1d2.Top + forest1d2.Height) then
+      if (img2.Top + img2.Height < wall1.Top) then
       begin
         location1.Visible := False;
         wall1.Visible := False;
@@ -444,7 +447,7 @@ begin
   if (setlocation = 2) then
   begin
     if (img2.Left < 40) then
-      if (img2.Top + img2.Height < wall1.Top) and (img2.Top > forest1d2.Top + forest1d2.Height) then
+      if (img2.Top + img2.Height < wall1.Top)  then
       begin
         Label6.Visible := False;
         location2.Visible := False;
@@ -508,6 +511,9 @@ end;
 
 procedure TForm1.quest();
 begin
+  Label2.Caption := 'Сила: ' + IntToStr(str);
+  Label3.Caption := 'Ловкость: ' + IntToStr(agi);
+  Label4.Caption := 'Инт: ' + IntToStr(int);
   if (npc2d1.Hint <> '3') then
   begin
     if (npc2d1.Hint = '1') then
@@ -518,7 +524,7 @@ begin
       npc2d1.Hint := '2';
     end;
     if (setlocation = 2)  then
-    if (npc2d1.Left - ( img2.Left + img2.Width) < 50) and (( abs( ( npc2d1.Top + npc2d1.Height ) - img2.Top) < 50  ) or ( abs( npc2d1.Top - (img2.Top + img2.Height)) < 50  ) ) then
+    if (npc2d1.Left - ( img2.Left + img2.Width) < 100) and (( abs( ( npc2d1.Top + npc2d1.Height ) - img2.Top) < 100  ) or ( abs( npc2d1.Top - (img2.Top + img2.Height)) < 100  ) ) then
     begin
       if (npc2d1.Hint = '0') then
       begin
@@ -539,11 +545,11 @@ begin
     end;
   end;
   if (setlocation = 3) then
-    if (enemy3d1.Left - ( img2.Left + img2.Width) < 50) and (( abs( ( enemy3d1.Top + enemy3d1.Height ) - img2.Top) < 80  ) or ( abs( enemy3d1.Top - (img2.Top + img2.Height)) < 80  ) ) then
+    if (w = false) and (enemy3d1.Left - ( img2.Left + img2.Width) < 50) and (( abs( ( enemy3d1.Top + enemy3d1.Height ) - img2.Top) < 80  ) or ( abs( enemy3d1.Top - (img2.Top + img2.Height)) < 80  ) ) then
       begin
         Form1.Enabled:=False;
         form2.Show;
-        
+        Form2.newfight();
       end;
 end;
 
