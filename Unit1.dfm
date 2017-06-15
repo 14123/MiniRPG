@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 234
-  Top = 133
+  Left = 410
+  Top = 195
   Width = 923
   Height = 454
   Caption = 'Form1'
@@ -1500,7 +1500,7 @@ object Form1: TForm1
     end
     object Label6: TLabel
       Left = 592
-      Top = 136
+      Top = 40
       Width = 39
       Height = 16
       Caption = #1059#1076#1072#1095#1080'!'
@@ -1683,13 +1683,6 @@ object Form1: TForm1
       Width = 31
       Height = 13
       Caption = 'Label4'
-    end
-    object Label5: TLabel
-      Left = 24
-      Top = 176
-      Width = 31
-      Height = 13
-      Caption = 'Label5'
     end
   end
   object btn1: TButton

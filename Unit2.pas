@@ -25,6 +25,7 @@ type
     procedure btn1Click(Sender: TObject);
     procedure btn2Click(Sender: TObject);
     procedure btn3Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure fight(att,attp:Integer);
   public
@@ -154,5 +155,10 @@ begin
 end;
 
 
+
+procedure TForm2.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Form1.Enabled := True;
+end;
 
 end.

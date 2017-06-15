@@ -1,6 +1,6 @@
 object Form2: TForm2
-  Left = 194
-  Top = 315
+  Left = 424
+  Top = 138
   Width = 523
   Height = 404
   Caption = 'Form2'
@@ -11,6 +11,7 @@ object Form2: TForm2
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13

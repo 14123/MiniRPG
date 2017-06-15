@@ -22,7 +22,6 @@ type
     Label3: TLabel;
     Label4: TLabel;
     wall1: TImage;
-    Label5: TLabel;
     forest1: TImage;
     forest1d2: TImage;
     forest1d3: TImage;
@@ -214,41 +213,31 @@ end;
 
 
 procedure TForm1.btn2Click(Sender: TObject);
+var Key:Char;
 begin
-  if y[1]<>0 then
-          begin
-            img2.Top:=img2.Top - 10;
-            y[1]:=y[1]-1;
-          end;
-
-
+  Key := 'W';
+  FormKeyPress(Sender,  Key);
 end;
 
 procedure TForm1.btn5Click(Sender: TObject);
+var Key:Char;
 begin
-   if y[1]<>33 then
-          begin
-            img2.Top:=img2.Top + 10;
-            y[1]:=y[1]+1;
-          end;
+  Key := 'S';
+  FormKeyPress(Sender,  Key);
 end;
 
 procedure TForm1.btn6Click(Sender: TObject);
+var Key:Char;
 begin
-        if x[1]<>65 then
-          begin
-            img2.Left :=img2.Left + 10;
-            x[1]:=x[1]+1;
-          end;
+  Key := 'D';
+  FormKeyPress(Sender,  Key);
 end;
 
 procedure TForm1.btn4Click(Sender: TObject);
+var Key:Char;
 begin
-        if x[1]<>0 then
-          begin
-            img2.Left:=img2.Left - 10;
-            x[1]:=x[1]-1;
-          end;
+  Key := 'A';
+  FormKeyPress(Sender,  Key);
 end;
 
 function TForm1.checkBarrier1(x, y, q: integer): Boolean;
