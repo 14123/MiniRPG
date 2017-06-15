@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.974,=C:\Users\Станислав\Documents\GitHub\MiniRPG\Test\TestUnit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.876,=C:\Users\Станислав\Documents\GitHub\MiniRPG\Test\TestUnit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.395,=C:\Users\Станислав\Documents\GitHub\MiniRPG\Unit2.pas</Transaction>
+  </Transactions>
+</BorlandProject>

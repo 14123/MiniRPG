@@ -70,15 +70,15 @@ type
     procedure Button9Click(Sender: TObject);
     procedure Button10Click(Sender: TObject);
   private
-    function checkBarrier1(x, y, q: integer): Boolean;
-    function checkBarrier2(x, y, q: integer): Boolean;
-    function checkBarrier3(x, y, q: integer): Boolean;
     procedure jumplevel();
     procedure quest();
     procedure newhero();
     procedure loadloc1();
   public
     int, agi, str: integer;
+    function checkBarrier1(x, y, q: integer): Integer;
+    function checkBarrier2(x, y, q: integer): Integer;
+    function checkBarrier3(x, y, q: integer): Integer;
   end;
 
 var
@@ -133,7 +133,7 @@ end;
 
 
 procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
-var a:Boolean;
+var a:Integer;
 begin
   case key of
   'W','w', 'Ö', 'ö':
@@ -144,7 +144,7 @@ begin
           a := checkBarrier2(img2.Left, img2.Top, 1 );
         if (setlocation = 3) then
           a := checkBarrier3(img2.Left, img2.Top, 1 );
-        if (a) then
+        if (a = 1) then
         begin
           if y[1]<>0 then
           begin
@@ -161,7 +161,7 @@ begin
       a := checkBarrier2(img2.Left, img2.Top, 2 );
       if (setlocation = 3) then
           a := checkBarrier3(img2.Left, img2.Top, 2 );
-     if(a) then
+     if(a = 1) then
       begin
         if x[1]<>0 then
           begin
@@ -178,7 +178,7 @@ begin
       a := checkBarrier2(img2.Left, img2.Top, 3 );
       if (setlocation = 3) then
           a := checkBarrier3(img2.Left, img2.Top, 3 );
-    if(a) then
+    if(a = 1) then
       begin
         if y[1]<>33 then
           begin
@@ -195,7 +195,7 @@ begin
       a := checkBarrier2(img2.Left, img2.Top, 4 );
     if (setlocation = 3) then
       a := checkBarrier3(img2.Left, img2.Top, 4 );
-    if(a) then
+    if(a = 1) then
       begin
         if x[1]<>65 then
           begin
@@ -240,20 +240,20 @@ begin
   FormKeyPress(Sender,  Key);
 end;
 
-function TForm1.checkBarrier1(x, y, q: integer): Boolean;
+function TForm1.checkBarrier1(x, y, q: integer): Integer;
 begin
   case q of
     1:
     begin
-      if ((y - 10> forest1.Top + forest1.Height) or (y + img2.Height < forest1.Top)  or  (x  > forest1.Left + forest1.Width) or (x + img2.Width < forest1.Left)) then
+      if ((y - 10> forest1.Top + forest1.Height) or (y + img2.Height < forest1.Top)  or  (x  >= forest1.Left + forest1.Width) or (x + img2.Width < forest1.Left)) then
          if ( (y - 10> wall1.Top + wall1.Height) or (y + img2.Height < wall1.Top)  or  (x  > wall1.Left + wall1.Width) or (x + img2.Width < wall1.Left) ) then
            if ((y - 10> forest1d2.Top + forest1d2.Height) or (y + img2.Height < forest1d2.Top)  or  (x  > forest1d2.Left + forest1d2.Width) or (x + img2.Width < forest1d2.Left)) then
               if ((y - 10> forest1d3.Top + forest1d3.Height) or (y + img2.Height < forest1d3.Top)  or  (x  > forest1d3.Left + forest1d3.Width) or (x + img2.Width < forest1d3.Left)) then
          begin
-            result := True;
+            result := 1;
             Exit;
          end;
-      result := False;
+      result := 0;
       Exit;
     end;
     2:
@@ -263,10 +263,10 @@ begin
           if ( (y > forest1d2.Top + forest1d2.Height) or (y + img2.Height < forest1d2.Top)  or  (x - 10  > forest1d2.Left + forest1d2.Width) or (x + img2.Width < forest1d2.Left +1) ) then
             if ( (y > forest1d3.Top + forest1d3.Height) or (y + img2.Height < forest1d3.Top)  or  (x - 10  > forest1d3.Left + forest1d3.Width) or (x + img2.Width < forest1d3.Left +1) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
          end;
-      result := False;
+      result := 0;
       Exit;
     end;
     3:
@@ -276,10 +276,10 @@ begin
           if (  (y > forest1d2.Top + forest1d2.Height) or (y + img2.Height + 10 < forest1d2.Top)  or  (x  > forest1d2.Left + forest1d2.Width) or (x + img2.Width < forest1d2.Left +1) ) then
             if (  (y > forest1d3.Top + forest1d3.Height) or (y + img2.Height + 10 < forest1d3.Top)  or  (x  > forest1d3.Left + forest1d3.Width) or (x + img2.Width < forest1d3.Left +1) ) then
          begin
-            result := True;
+            result := 1;
             Exit;
          end;
-      result := False;
+      result := 0;
       Exit;
     end;
     4:
@@ -289,16 +289,16 @@ begin
           if ( (y > forest1d2.Top + forest1d2.Height) or (y + img2.Height < forest1d2.Top)  or  (x  > forest1d2.Left + forest1d2.Width) or (x + img2.Width + 10 < forest1d2.Left ) ) then
             if ( (y > forest1d3.Top + forest1d3.Height) or (y + img2.Height < forest1d3.Top)  or  (x  > forest1d3.Left + forest1d3.Width) or (x + img2.Width + 10 < forest1d3.Left ) ) then
           begin
-            result := True;
+            result := 1;
             Exit;
           end;
-      result := False;
+      result := 0;
       Exit;
     end;
   end;
 end;
 
-function TForm1.checkBarrier2(x, y, q: integer): Boolean;
+function TForm1.checkBarrier2(x, y, q: integer): Integer;
 begin
   case q of
     1:
@@ -308,10 +308,10 @@ begin
           if (door2d1.Visible = false) or ( (y - 10> door2d1.Top + door2d1.Height) or (y + img2.Height < door2d1.Top)  or  (x  > door2d1.Left + door2d1.Width) or (x + img2.Width < door2d1.Left) ) then
             if (npc2d1.Visible = false) or ( (y - 10> npc2d1.Top + npc2d1.Height) or (y + img2.Height < npc2d1.Top)  or  (x  > npc2d1.Left + npc2d1.Width) or (x + img2.Width < npc2d1.Left) ) then
          begin
-            result := True;
+            result := 1;
             Exit;
          end;
-      result := False;
+      result := 0;
       Exit;
     end;
     2:
@@ -321,10 +321,10 @@ begin
           if (door2d1.Visible = false) or  ( (y > door2d1.Top + door2d1.Height) or (y + img2.Height < door2d1.Top)  or  (x - 10  > door2d1.Left + door2d1.Width) or (x + img2.Width < door2d1.Left +1) ) then
             if (npc2d1.Visible = false) or ( (y > npc2d1.Top + npc2d1.Height) or (y + img2.Height < npc2d1.Top)  or  (x - 10  > npc2d1.Left + npc2d1.Width) or (x + img2.Width < npc2d1.Left +1) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
     3:
@@ -334,10 +334,10 @@ begin
           if  (door2d1.Visible = false) or (  (y > door2d1.Top + door2d1.Height) or (y + img2.Height + 10 < door2d1.Top)  or  (x  > door2d1.Left + door2d1.Width) or (x + img2.Width < door2d1.Left +1) )  then
             if (npc2d1.Visible = false) or (  (y > npc2d1.Top + npc2d1.Height) or (y + img2.Height + 10 < npc2d1.Top)  or  (x  > npc2d1.Left + npc2d1.Width) or (x + img2.Width < npc2d1.Left +1) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
     4:
@@ -347,16 +347,16 @@ begin
           if (door2d1.Visible = false) or ( (y > door2d1.Top + door2d1.Height) or (y + img2.Height < door2d1.Top)  or  (x  > door2d1.Left + door2d1.Width) or (x + img2.Width + 10 < door2d1.Left ) ) then
             if (npc2d1.Visible = false) or ( (y > npc2d1.Top + npc2d1.Height) or (y + img2.Height < npc2d1.Top)  or  (x  > npc2d1.Left + npc2d1.Width) or (x + img2.Width + 10 < npc2d1.Left ) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
   end;
 end;
 
-function TForm1.checkBarrier3(x, y, q: integer): Boolean;
+function TForm1.checkBarrier3(x, y, q: integer): Integer;
 begin
   case q of
     1:
@@ -364,10 +364,10 @@ begin
       if ((y - 10> wall3d1.Top + wall3d1.Height) or (y + img2.Height < wall3d1.Top)  or  (x  > wall3d1.Left + wall3d1.Width) or (x + img2.Width < wall3d1.Left)) then
         if ((y - 10> wall3d2.Top + wall3d2.Height) or (y + img2.Height < wall3d2.Top)  or  (x  > wall3d2.Left + wall3d2.Width) or (x + img2.Width < wall3d2.Left)) then
          begin
-            result := True;
+            result := 1;
             Exit;
          end;
-      result := False;
+      result := 0;
       Exit;
     end;
     2:
@@ -375,10 +375,10 @@ begin
       if ( (y > wall3d1.Top + wall3d1.Height) or (y + img2.Height < wall3d1.Top) or  (x - 10 > wall3d1.Left + wall3d1.Width) or (x + img2.Width < wall3d1.Left + 1) ) then
         if ( (y > wall3d2.Top + wall3d2.Height) or (y + img2.Height < wall3d2.Top) or  (x - 10 > wall3d2.Left + wall3d2.Width) or (x + img2.Width < wall3d2.Left + 1) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
     3:
@@ -386,10 +386,10 @@ begin
       if ( (y > wall3d1.Top + wall3d1.Height) or (y + 10 + img2.Height < wall3d1.Top) or  (x > wall3d1.Left + wall3d1.Width) or (x + img2.Width < wall3d1.Left + 1) ) then
         if ( (y > wall3d2.Top + wall3d2.Height) or (y + 10 + img2.Height < wall3d2.Top) or  (x > wall3d2.Left + wall3d2.Width) or (x + img2.Width < wall3d2.Left + 1) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
     4:
@@ -397,10 +397,10 @@ begin
       if ( (y > wall3d1.Top + wall3d1.Height) or (y + img2.Height < wall3d1.Top) or  (x > wall3d1.Left + wall3d1.Width) or (x + img2.Width + 10 < wall3d1.Left) ) then
         if ( (y > wall3d2.Top + wall3d2.Height) or (y + img2.Height < wall3d2.Top) or  (x > wall3d2.Left + wall3d2.Width) or (x + img2.Width + 10 < wall3d2.Left) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
   end;

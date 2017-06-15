@@ -27,8 +27,10 @@ type
     procedure btn3Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
-    procedure fight(att,attp:Integer);
+
   public
+    procedure fight(att,attp:Integer);
+    function endoffight(hpp, hp:Integer): Integer;
     procedure newfight();
   end;
 
@@ -72,6 +74,7 @@ begin
 end;
 
 procedure TForm2.fight(att,attp:Integer);
+var q: Integer;
 begin
   hp:=hp-attp;
   pb1.Position:=hp;
@@ -79,20 +82,35 @@ begin
   pb2.Position:=hpp;
   att:=0;
   attp:=0;
-  if (hpp<=0) then
-    begin
+  q := endoffight(hpp, hp);
+  if (q = 1)  then
+  begin
       w:=True;
       Form1.Enabled:=True;
       Form2.Close;
       Form1.enemy3d1.Visible:=False;
-    end;
-  if (hp<=0)then
-    begin
+  end;
+  if ( q = 2) then
+   begin
       hp:=Form1.str*5;
       hpp:=strp*5;
-    end;
+   end;
 end;
 
+function TForm2.endoffight(hpp, hp: Integer): Integer;
+begin
+  if (hpp<=0) then
+  begin
+    Result := 1;
+    Exit;
+  end;
+  if (hp<=0)then
+  begin
+    Result := 2;
+    Exit;
+  end;
+  Result := 0;
+end;
 
 procedure TForm2.btn1Click(Sender: TObject);
 begin
@@ -158,7 +176,9 @@ end;
 
 procedure TForm2.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Form1.Enabled := True;
+  Form1.Close;
 end;
+
+
 
 end.
