@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, StdCtrls, jpeg, ComCtrls;
+  Dialogs, ExtCtrls, StdCtrls, jpeg, ComCtrls, PNGImage;
 
 type
   TForm1 = class(TForm)
@@ -52,6 +52,13 @@ type
     Label10: TLabel;
     Button10: TButton;
     enemy3d1: TImage;
+    InventSword1: TImage;
+    Label5: TLabel;
+    img2r: TImage;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    Label14: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btn2Click(Sender: TObject);
@@ -70,15 +77,17 @@ type
     procedure Button9Click(Sender: TObject);
     procedure Button10Click(Sender: TObject);
   private
-    function checkBarrier1(x, y, q: integer): Boolean;
-    function checkBarrier2(x, y, q: integer): Boolean;
-    function checkBarrier3(x, y, q: integer): Boolean;
+    fight: integer;
     procedure jumplevel();
     procedure quest();
     procedure newhero();
     procedure loadloc1();
+    procedure endhistory();
   public
     int, agi, str: integer;
+    function checkBarrier1(x, y, q: integer): Integer;
+    function checkBarrier2(x, y, q: integer): Integer;
+    function checkBarrier3(x, y, q: integer): Integer;
   end;
 
 var
@@ -107,6 +116,7 @@ var
   S:string;
 begin
   //фон
+   fight := 0;
    setlocation := 1;
    Brush.Bitmap := TBitMap.Create;
    Brush.Bitmap.LoadFromFile('im\fon.bmp');
@@ -114,10 +124,11 @@ begin
    location1.Picture.LoadFromFile(s+'im\forest1.jpg');
    location2.Picture.LoadFromFile(s+'im\location2.bmp');
    location3.Picture.LoadFromFile(s+'im\location3.jpg');
-   img2.Picture.LoadFromFile(s+'im\hero.jpg');
-   npc2d1.Picture.LoadFromFile(s+'im\npc1.jpg');
-   enemy3d1.Picture.LoadFromFile(s+'im\enemy.bmp');
-   sword1.Picture.LoadFromFile(s+'im\sword1.jpg');
+   img2.Picture.LoadFromFile(s+'im\herol.png');
+   img2r.Picture.LoadFromFile(s+'im\heror.png');
+   npc2d1.Picture.LoadFromFile(s+'im\npc1.png');
+   enemy3d1.Picture.LoadFromFile(s+'im\enemy.png');
+   sword1.Picture.LoadFromFile(s+'im\sword1.png');
    //wall1.Picture.LoadFromFile(s+'im\wall1.jpg');
    //forest1.Picture.LoadFromFile(s+'im\forest1.jpg');
    //forest1d2.Picture.LoadFromFile(s+'im\location1.jpg');
@@ -125,89 +136,103 @@ begin
    castle2d1.Picture.LoadFromFile(s+'im\castle1.jpg');
    castle2d2.Picture.LoadFromFile(s+'im\castle1.jpg');
    door2d1.Picture.LoadFromFile(s+'im\wall1.jpg');
-   wall3d1.Picture.LoadFromFile(s+'im\wall1.jpg');
-   wall3d2.Picture.LoadFromFile(s+'im\wall1.jpg');
+   InventSword1.Picture.LoadFromFile(s+'im\sword1.png');
+//   wall3d1.Picture.LoadFromFile(s+'im\wall1.jpg');
+//   wall3d2.Picture.LoadFromFile(s+'im\wall1.jpg');
 
 end;
 
 
 
 procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
-var a:Boolean;
+var a:Integer;
 begin
-  case key of
-  'W','w', 'Ц', 'ц':
-  begin
-        if (setlocation = 1) then
-          a := checkBarrier1(img2.Left, img2.Top, 1 );
-        if (setlocation = 2) then
-          a := checkBarrier2(img2.Left, img2.Top, 1 );
+  if (fight = 0) then
+    begin
+    case key of
+    'W','w', 'Ц', 'ц':
+    begin
+          if (setlocation = 1) then
+            a := checkBarrier1(img2.Left, img2.Top, 1 );
+          if (setlocation = 2) then
+            a := checkBarrier2(img2.Left, img2.Top, 1 );
+          if (setlocation = 3) then
+            a := checkBarrier3(img2.Left, img2.Top, 1 );
+          if (a = 1) then
+          begin
+            if y[1]<>0 then
+            begin
+              img2.Top:=img2.Top - 10;
+              img2r.Top:=img2r.Top - 10;
+              y[1]:=y[1]-1;
+            end;
+         end;
+    end;
+    'A','a', 'Ф', 'ф':
+    begin
+       if (setlocation = 1) then
+        a := checkBarrier1(img2.Left , img2.Top, 2 );
+       if (setlocation = 2) then
+        a := checkBarrier2(img2.Left, img2.Top, 2 );
         if (setlocation = 3) then
-          a := checkBarrier3(img2.Left, img2.Top, 1 );
-        if (a) then
+            a := checkBarrier3(img2.Left, img2.Top, 2 );
+       if(a = 1) then
         begin
-          if y[1]<>0 then
+          if x[1]<>0 then
+            begin
+              img2.Left:=img2.Left - 10;
+              img2r.Left:=img2r.Left - 10;
+              img2.Visible := True;
+              img2r.Visible := False;
+              x[1]:=x[1]-1;
+            end;
+        end;
+    end;
+    'S','s', 'Ы', 'ы':
+    begin
+      if (setlocation = 1) then
+        a := checkBarrier1(img2.Left , img2.Top, 3 );
+      if (setlocation = 2) then
+        a := checkBarrier2(img2.Left, img2.Top, 3 );
+        if (setlocation = 3) then
+            a := checkBarrier3(img2.Left, img2.Top, 3 );
+      if(a = 1) then
+        begin
+          if y[1]<>33 then
           begin
-            img2.Top:=img2.Top - 10;
-            y[1]:=y[1]-1;
-          end;
-       end;
-  end;
-  'A','a', 'Ф', 'ф':
-  begin
-     if (setlocation = 1) then
-      a := checkBarrier1(img2.Left , img2.Top, 2 );
-     if (setlocation = 2) then
-      a := checkBarrier2(img2.Left, img2.Top, 2 );
+              img2.Top:=img2.Top + 10;
+              img2r.Top:=img2r.Top + 10;
+              y[1]:=y[1]+1;
+            end;
+        end;
+    end;
+    'D','d', 'в', 'В':
+     begin
+      if (setlocation = 1) then
+        a := checkBarrier1(img2.Left , img2.Top, 4 );
+      if (setlocation = 2) then
+        a := checkBarrier2(img2.Left, img2.Top, 4 );
       if (setlocation = 3) then
-          a := checkBarrier3(img2.Left, img2.Top, 2 );
-     if(a) then
-      begin
-        if x[1]<>0 then
-          begin
-            img2.Left:=img2.Left - 10;
-            x[1]:=x[1]-1;
-          end;
-      end;
-  end;
-  'S','s', 'Ы', 'ы':
-  begin
-    if (setlocation = 1) then
-      a := checkBarrier1(img2.Left , img2.Top, 3 );
-    if (setlocation = 2) then
-      a := checkBarrier2(img2.Left, img2.Top, 3 );
-      if (setlocation = 3) then
-          a := checkBarrier3(img2.Left, img2.Top, 3 );
-    if(a) then
-      begin
-        if y[1]<>33 then
-          begin
-            img2.Top:=img2.Top + 10;
-            y[1]:=y[1]+1;
-          end;
-      end;
-  end;
-  'D','d', 'в', 'В':
-   begin
-    if (setlocation = 1) then
-      a := checkBarrier1(img2.Left , img2.Top, 4 );
-    if (setlocation = 2) then
-      a := checkBarrier2(img2.Left, img2.Top, 4 );
-    if (setlocation = 3) then
-      a := checkBarrier3(img2.Left, img2.Top, 4 );
-    if(a) then
-      begin
-        if x[1]<>65 then
-          begin
-            img2.Left :=img2.Left + 10;
-            x[1]:=x[1]+1;
-          end;
+        a := checkBarrier3(img2.Left, img2.Top, 4 );
+      if(a = 1) then
+        begin
+          if x[1]<>65 then
+            begin
+              img2.Left :=img2.Left + 10;
+              img2r.Left :=img2r.Left + 10;
+              img2.Visible := False;
+              img2r.Visible := True;
+              x[1]:=x[1]+1;
+            end;
+        end;
       end;
     end;
+    jumplevel();
+    quest;
+    Form1.Refresh;
   end;
-  jumplevel();
-  quest;
-  Form1.Refresh;
+  if (fight = 1) then
+    endhistory();
 end;
 
 
@@ -240,20 +265,20 @@ begin
   FormKeyPress(Sender,  Key);
 end;
 
-function TForm1.checkBarrier1(x, y, q: integer): Boolean;
+function TForm1.checkBarrier1(x, y, q: integer): Integer;
 begin
   case q of
     1:
     begin
-      if ((y - 10> forest1.Top + forest1.Height) or (y + img2.Height < forest1.Top)  or  (x  > forest1.Left + forest1.Width) or (x + img2.Width < forest1.Left)) then
+      if ((y - 10> forest1.Top + forest1.Height) or (y + img2.Height < forest1.Top)  or  (x  >= forest1.Left + forest1.Width) or (x + img2.Width < forest1.Left)) then
          if ( (y - 10> wall1.Top + wall1.Height) or (y + img2.Height < wall1.Top)  or  (x  > wall1.Left + wall1.Width) or (x + img2.Width < wall1.Left) ) then
            if ((y - 10> forest1d2.Top + forest1d2.Height) or (y + img2.Height < forest1d2.Top)  or  (x  > forest1d2.Left + forest1d2.Width) or (x + img2.Width < forest1d2.Left)) then
               if ((y - 10> forest1d3.Top + forest1d3.Height) or (y + img2.Height < forest1d3.Top)  or  (x  > forest1d3.Left + forest1d3.Width) or (x + img2.Width < forest1d3.Left)) then
          begin
-            result := True;
+            result := 1;
             Exit;
          end;
-      result := False;
+      result := 0;
       Exit;
     end;
     2:
@@ -263,10 +288,10 @@ begin
           if ( (y > forest1d2.Top + forest1d2.Height) or (y + img2.Height < forest1d2.Top)  or  (x - 10  > forest1d2.Left + forest1d2.Width) or (x + img2.Width < forest1d2.Left +1) ) then
             if ( (y > forest1d3.Top + forest1d3.Height) or (y + img2.Height < forest1d3.Top)  or  (x - 10  > forest1d3.Left + forest1d3.Width) or (x + img2.Width < forest1d3.Left +1) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
          end;
-      result := False;
+      result := 0;
       Exit;
     end;
     3:
@@ -276,10 +301,10 @@ begin
           if (  (y > forest1d2.Top + forest1d2.Height) or (y + img2.Height + 10 < forest1d2.Top)  or  (x  > forest1d2.Left + forest1d2.Width) or (x + img2.Width < forest1d2.Left +1) ) then
             if (  (y > forest1d3.Top + forest1d3.Height) or (y + img2.Height + 10 < forest1d3.Top)  or  (x  > forest1d3.Left + forest1d3.Width) or (x + img2.Width < forest1d3.Left +1) ) then
          begin
-            result := True;
+            result := 1;
             Exit;
          end;
-      result := False;
+      result := 0;
       Exit;
     end;
     4:
@@ -289,16 +314,16 @@ begin
           if ( (y > forest1d2.Top + forest1d2.Height) or (y + img2.Height < forest1d2.Top)  or  (x  > forest1d2.Left + forest1d2.Width) or (x + img2.Width + 10 < forest1d2.Left ) ) then
             if ( (y > forest1d3.Top + forest1d3.Height) or (y + img2.Height < forest1d3.Top)  or  (x  > forest1d3.Left + forest1d3.Width) or (x + img2.Width + 10 < forest1d3.Left ) ) then
           begin
-            result := True;
+            result := 1;
             Exit;
           end;
-      result := False;
+      result := 0;
       Exit;
     end;
   end;
 end;
 
-function TForm1.checkBarrier2(x, y, q: integer): Boolean;
+function TForm1.checkBarrier2(x, y, q: integer): Integer;
 begin
   case q of
     1:
@@ -308,10 +333,10 @@ begin
           if (door2d1.Visible = false) or ( (y - 10> door2d1.Top + door2d1.Height) or (y + img2.Height < door2d1.Top)  or  (x  > door2d1.Left + door2d1.Width) or (x + img2.Width < door2d1.Left) ) then
             if (npc2d1.Visible = false) or ( (y - 10> npc2d1.Top + npc2d1.Height) or (y + img2.Height < npc2d1.Top)  or  (x  > npc2d1.Left + npc2d1.Width) or (x + img2.Width < npc2d1.Left) ) then
          begin
-            result := True;
+            result := 1;
             Exit;
          end;
-      result := False;
+      result := 0;
       Exit;
     end;
     2:
@@ -321,10 +346,10 @@ begin
           if (door2d1.Visible = false) or  ( (y > door2d1.Top + door2d1.Height) or (y + img2.Height < door2d1.Top)  or  (x - 10  > door2d1.Left + door2d1.Width) or (x + img2.Width < door2d1.Left +1) ) then
             if (npc2d1.Visible = false) or ( (y > npc2d1.Top + npc2d1.Height) or (y + img2.Height < npc2d1.Top)  or  (x - 10  > npc2d1.Left + npc2d1.Width) or (x + img2.Width < npc2d1.Left +1) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
     3:
@@ -334,10 +359,10 @@ begin
           if  (door2d1.Visible = false) or (  (y > door2d1.Top + door2d1.Height) or (y + img2.Height + 10 < door2d1.Top)  or  (x  > door2d1.Left + door2d1.Width) or (x + img2.Width < door2d1.Left +1) )  then
             if (npc2d1.Visible = false) or (  (y > npc2d1.Top + npc2d1.Height) or (y + img2.Height + 10 < npc2d1.Top)  or  (x  > npc2d1.Left + npc2d1.Width) or (x + img2.Width < npc2d1.Left +1) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
     4:
@@ -347,16 +372,16 @@ begin
           if (door2d1.Visible = false) or ( (y > door2d1.Top + door2d1.Height) or (y + img2.Height < door2d1.Top)  or  (x  > door2d1.Left + door2d1.Width) or (x + img2.Width + 10 < door2d1.Left ) ) then
             if (npc2d1.Visible = false) or ( (y > npc2d1.Top + npc2d1.Height) or (y + img2.Height < npc2d1.Top)  or  (x  > npc2d1.Left + npc2d1.Width) or (x + img2.Width + 10 < npc2d1.Left ) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
   end;
 end;
 
-function TForm1.checkBarrier3(x, y, q: integer): Boolean;
+function TForm1.checkBarrier3(x, y, q: integer): Integer;
 begin
   case q of
     1:
@@ -364,10 +389,10 @@ begin
       if ((y - 10> wall3d1.Top + wall3d1.Height) or (y + img2.Height < wall3d1.Top)  or  (x  > wall3d1.Left + wall3d1.Width) or (x + img2.Width < wall3d1.Left)) then
         if ((y - 10> wall3d2.Top + wall3d2.Height) or (y + img2.Height < wall3d2.Top)  or  (x  > wall3d2.Left + wall3d2.Width) or (x + img2.Width < wall3d2.Left)) then
          begin
-            result := True;
+            result := 1;
             Exit;
          end;
-      result := False;
+      result := 0;
       Exit;
     end;
     2:
@@ -375,10 +400,10 @@ begin
       if ( (y > wall3d1.Top + wall3d1.Height) or (y + img2.Height < wall3d1.Top) or  (x - 10 > wall3d1.Left + wall3d1.Width) or (x + img2.Width < wall3d1.Left + 1) ) then
         if ( (y > wall3d2.Top + wall3d2.Height) or (y + img2.Height < wall3d2.Top) or  (x - 10 > wall3d2.Left + wall3d2.Width) or (x + img2.Width < wall3d2.Left + 1) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
     3:
@@ -386,10 +411,10 @@ begin
       if ( (y > wall3d1.Top + wall3d1.Height) or (y + 10 + img2.Height < wall3d1.Top) or  (x > wall3d1.Left + wall3d1.Width) or (x + img2.Width < wall3d1.Left + 1) ) then
         if ( (y > wall3d2.Top + wall3d2.Height) or (y + 10 + img2.Height < wall3d2.Top) or  (x > wall3d2.Left + wall3d2.Width) or (x + img2.Width < wall3d2.Left + 1) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
     4:
@@ -397,14 +422,16 @@ begin
       if ( (y > wall3d1.Top + wall3d1.Height) or (y + img2.Height < wall3d1.Top) or  (x > wall3d1.Left + wall3d1.Width) or (x + img2.Width + 10 < wall3d1.Left) ) then
         if ( (y > wall3d2.Top + wall3d2.Height) or (y + img2.Height < wall3d2.Top) or  (x > wall3d2.Left + wall3d2.Width) or (x + img2.Width + 10 < wall3d2.Left) ) then
         begin
-            result := True;
+            result := 1;
             Exit;
         end;
-      result := False;
+      result := 0;
       Exit;
     end;
   end;
 end;
+
+
 
 procedure TForm1.jumplevel();
 begin
@@ -428,6 +455,7 @@ begin
         end;
         img2.Left := 100;
         x[1] := img2.Left div 10;
+        img2r.Left := img2.Left;
         location2.SendToBack;
         castle2d1.BringToFront;
         castle2d2.BringToFront;
@@ -455,6 +483,7 @@ begin
           sword1.Visible := True;
         end;
         img2.Left := 620;
+        img2r.Left := img2.Left;
         x[1] := img2.Left div 10;
         setlocation := 1;
       end;
@@ -473,6 +502,7 @@ begin
         wall3d2.Visible := True;
         enemy3d1.Visible := True;
         img2.Left := 100;
+        img2r.Left := img2.Left;
         x[1] := img2.Left div 10;
         setlocation := 3;
       end;
@@ -492,6 +522,7 @@ begin
         if (npc2d1.Hint = '0') or (npc2d1.Hint = '1') or (npc2d1.Hint = '2') then
           npc2d1.Visible := True;
         img2.Left := 600;
+        img2r.Left := img2.Left;
         x[1] := img2.Left div 10;
         setlocation := 2;
       end;
@@ -500,15 +531,13 @@ end;
 
 procedure TForm1.quest();
 begin
-  Label2.Caption := 'Сила: ' + IntToStr(str);
-  Label3.Caption := 'Ловкость: ' + IntToStr(agi);
-  Label4.Caption := 'Инт: ' + IntToStr(int);
   if (npc2d1.Hint <> '3') then
   begin
     if (npc2d1.Hint = '1') then
     if (img2.Top + img2.Height > sword1.Top) and (img2.Left < sword1.Left + sword1.Width) then
     begin
       sword1.Visible := False;
+      InventSword1.Visible := True;
       sword1.Hint := '1';
       npc2d1.Hint := '2';
     end;
@@ -536,10 +565,58 @@ begin
   if (setlocation = 3) then
     if (w = false) and (enemy3d1.Left - ( img2.Left + img2.Width) < 50) and (( abs( ( enemy3d1.Top + enemy3d1.Height ) - img2.Top) < 80  ) or ( abs( enemy3d1.Top - (img2.Top + img2.Height)) < 80  ) ) then
       begin
+        fight := 1;
         Form1.Enabled:=False;
         form2.Show;
         Form2.newfight();
+        endhistory();
       end;
+end;
+
+procedure TForm1.endhistory();
+begin
+  if (Form2.endoffight(form2.hpp,form2.hp) = 1) then
+  begin
+    location3.Visible := False;
+    location2.Visible := True;
+    enemy3d1.Visible := False;
+    img2r.Top := 30;
+    img2r.Left := 300;
+    img2r.Enabled := False;
+    Label11.Caption := 'Вы победили! Жители вашей деревни вскоре вернутся';
+    Label12.Caption := 'в родные места, и ваш подвиг ещё долго будут помнить.';
+    Application.ProcessMessages;
+    sleep(5000);
+    Form1.Close();
+  end;
+  if (Form2.endoffight(form2.hpp,form2.hp) = 2) then
+  begin
+    location3.Visible := False;
+    location2.Visible := True;
+    enemy3d1.Top := 30;
+    enemy3d1.Left := 300;
+    img2r.Visible := False;
+    Label11.Caption := 'Вы погибли...';
+    Application.ProcessMessages;
+    sleep(3000);
+    Form1.Close();
+  end;
+  if (Form2.endoffight(form2.hpp,form2.hp) = 3) then
+  begin
+    enemy3d1.Visible := False;
+    img2r.Visible := False;
+    location3.Visible := False;
+    location2.Visible := True;
+    sword1.Visible := True;
+    sword1.Top := 30;
+    sword1.Left := 300;
+    Label11.Caption := 'Вы победили, но погибли в бою... Ваш народ будет помнить о вас...';
+    Application.ProcessMessages;
+    sleep(3000);
+    Form1.Close();
+  end;
+
+
 end;
 
 procedure TForm1.loadloc1();
@@ -551,9 +628,13 @@ begin
   wall1.Visible := True;
   if (npc2d1.Hint = '1') then
     sword1.Visible := True;
+  if (npc2d1.Hint = '2') or (npc2d1.Hint = '3') then
+    InventSword1.Visible := True;
   img2.Visible := True;
   img2.Top := location1.Height div 2;
   img2.Left := location1.Width div 2;
+  img2r.Top := img2.Top;
+  img2r.Left := img2.Left;
   x[1]:=img2.Left div 10;
   y[1]:=img2.Top div 10;
   Button1.Visible := False;
@@ -570,6 +651,7 @@ begin
   Button8.Visible := False;
   Button9.Visible := False;
   Button10.Visible := False;
+  Label5.Caption := 'Инвентарь';
 end;
 
 procedure TForm1.Button1Click(Sender: TObject);
@@ -599,8 +681,21 @@ begin
      str := StrToInt(ListBox1.Items[2]);
      agi := StrToInt(ListBox1.Items[3]);
      int := StrToInt(ListBox1.Items[4]);
+     if (agi =0) or (int = 0) or (str = 0) then
+     begin
+       agi := 10;
+       str := 10;
+       int := 10;
+     end;
      loadloc1;
-   end;
+     Label2.Caption := 'Сила: ' + IntToStr(str);
+     Label3.Caption := 'Ловкость: ' + IntToStr(agi);
+     Label4.Caption := 'Интелект: ' + IntToStr(int);
+     Label13.Visible := False;
+     Label14.Visible := False;
+   end
+   else
+    newhero();
 end;
 
 
@@ -618,12 +713,10 @@ begin
   Label7.Visible := True;
   Label8.Visible := True;
   Label9.Visible := True;
-  Button4.Visible := True;
   Button5.Visible := True;
-  Button6.Visible := True;
   Button7.Visible := True;
-  Button8.Visible := True;
   Button9.Visible := True;
+  Button10.Visible := True;
   img2.Visible := True;
   skills := 30;
   str := 10;
@@ -633,6 +726,8 @@ begin
   Label8.Caption := Label8.Caption + IntToStr(agi);
   Label9.Caption := Label9.Caption + IntToStr(int);
   Label10.Caption := Label10.Caption + IntToStr(skills);
+  Label13.Visible := False;
+  Label14.Visible := False;
 end;
 
 procedure TForm1.Button4Click(Sender: TObject);
@@ -641,6 +736,11 @@ begin
   begin
     str := str - 1;
     skills := skills + 1;
+    Button5.Visible := True;
+    Button7.Visible := True;
+    Button9.Visible := True;
+    if (str = 10) then
+      Button4.Visible := False;
   end;
   Label7.Caption := 'Сила: ' + IntToStr(str);
   Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
@@ -652,6 +752,11 @@ begin
   begin
     agi := agi - 1;
     skills := skills + 1;
+    Button5.Visible := True;
+    Button7.Visible := True;
+    Button9.Visible := True;
+    if (agi = 10) then
+      Button6.Visible := False;
   end;
   Label8.Caption := 'Ловкость: ' + IntToStr(agi);
   Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
@@ -663,6 +768,11 @@ begin
   begin
     int := int - 1;
     skills := skills + 1;
+    Button5.Visible := True;
+    Button7.Visible := True;
+    Button9.Visible := True;
+    if (int = 10) then
+      Button8.Visible := False;
   end;
   Label9.Caption := 'Интелект: ' + IntToStr(int);
   Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
@@ -674,6 +784,13 @@ begin
   begin
     str := str + 1;
     skills := skills - 1;
+    Button4.Visible := True;
+    if (skills = 0) then
+    begin
+      Button5.Visible := False;
+      Button7.Visible := False;
+      Button9.Visible := False;
+    end;
     Label7.Caption := 'Сила: ' + IntToStr(str);
     Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
   end;
@@ -685,6 +802,13 @@ begin
   begin
     agi := agi + 1;
     skills := skills - 1;
+    Button6.Visible := True;
+    if (skills = 0) then
+    begin
+      Button5.Visible := False;
+      Button7.Visible := False;
+      Button9.Visible := False;
+    end;
     Label8.Caption := 'Ловкость: ' + IntToStr(agi);
     Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
   end;
@@ -696,6 +820,13 @@ begin
   begin
     int := int + 1;
     skills := skills - 1;
+    Button8.Visible := True;
+    if (skills = 0) then
+    begin
+      Button5.Visible := False;
+      Button7.Visible := False;
+      Button9.Visible := False;
+    end;
     Label9.Caption := 'Интелект: ' + IntToStr(int);
     Label10.Caption := 'Оставшиеся очки: ' + IntToStr(skills);
   end;
@@ -703,6 +834,9 @@ end;
 
 procedure TForm1.Button10Click(Sender: TObject);
 begin
+  Label2.Caption := 'Сила: ' + IntToStr(str);
+  Label3.Caption := 'Ловкость: ' + IntToStr(agi);
+  Label4.Caption := 'Интелект: ' + IntToStr(int);
  loadloc1;
 end;
 

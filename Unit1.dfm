@@ -1,9 +1,9 @@
 object Form1: TForm1
   Left = 410
   Top = 195
-  Width = 923
-  Height = 454
-  Caption = 'Form1'
+  Caption = 'MiniRPG'
+  ClientHeight = 415
+  ClientWidth = 907
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -1476,7 +1476,7 @@ object Form1: TForm1
       Height = 16
       Caption = #1053#1072#1081#1076#1080' '#1084#1077#1095', '#1095#1090#1086#1073#1099' '#1074#1099#1078#1080#1090#1100' '#1074' '#1079#1072#1084#1082#1077'!'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
+      Font.Color = clRed
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = []
@@ -1485,17 +1485,17 @@ object Form1: TForm1
       Visible = False
     end
     object wall3d1: TImage
-      Left = 352
-      Top = 0
+      Left = 327
+      Top = -7
       Width = 33
-      Height = 121
+      Height = 152
       Visible = False
     end
     object wall3d2: TImage
-      Left = 352
-      Top = 288
+      Left = 328
+      Top = 256
       Width = 33
-      Height = 113
+      Height = 140
       Visible = False
     end
     object Label6: TLabel
@@ -1505,7 +1505,7 @@ object Form1: TForm1
       Height = 16
       Caption = #1059#1076#1072#1095#1080'!'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
+      Font.Color = clRed
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = []
@@ -1519,6 +1519,12 @@ object Form1: TForm1
       Width = 32
       Height = 13
       Caption = #1057#1080#1083#1072': '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       Visible = False
     end
     object Label8: TLabel
@@ -1527,6 +1533,12 @@ object Form1: TForm1
       Width = 55
       Height = 13
       Caption = #1051#1086#1074#1082#1086#1089#1090#1100': '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       Visible = False
     end
     object Label9: TLabel
@@ -1535,6 +1547,12 @@ object Form1: TForm1
       Width = 56
       Height = 13
       Caption = #1048#1085#1090#1077#1083#1077#1082#1090': '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
       Visible = False
     end
     object Label10: TLabel
@@ -1543,6 +1561,12 @@ object Form1: TForm1
       Width = 96
       Height = 13
       Caption = #1054#1089#1090#1072#1074#1096#1080#1077#1089#1103' '#1086#1095#1082#1080': '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindow
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object enemy3d1: TImage
       Left = 496
@@ -1550,6 +1574,55 @@ object Form1: TForm1
       Width = 50
       Height = 70
       Visible = False
+    end
+    object img2r: TImage
+      Left = 504
+      Top = 272
+      Width = 50
+      Height = 70
+      Visible = False
+    end
+    object Label11: TLabel
+      Left = 208
+      Top = 112
+      Width = 3
+      Height = 13
+    end
+    object Label12: TLabel
+      Left = 200
+      Top = 144
+      Width = 3
+      Height = 13
+    end
+    object Label13: TLabel
+      Left = 112
+      Top = 29
+      Width = 509
+      Height = 13
+      Caption = 
+        #1046#1080#1090#1077#1083#1077#1081' '#1074#1072#1096#1077#1081' '#1076#1077#1088#1077#1074#1085#1080' '#1076#1072#1074#1085#1086' '#1084#1091#1095#1072#1077#1090' '#1086#1076#1080#1085#1086#1082#1080#1081' '#1080' '#1089#1080#1083#1100#1085#1099#1081' '#1088#1099#1094#1072#1088#1100', '#1087#1088 +
+        #1086#1078#1080#1074#1072#1102#1097#1080#1081' '#1074' '#1089#1074#1086#1105#1084' '#1079#1072#1084#1082#1077'. '
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label14: TLabel
+      Left = 47
+      Top = 62
+      Width = 634
+      Height = 13
+      Caption = 
+        #1063#1090#1086#1073#1099' '#1074#1099#1078#1080#1090#1100', '#1080#1084' '#1087#1088#1080#1096#1083#1086#1089#1100' '#1087#1086#1082#1080#1085#1091#1090#1100' '#1087#1083#1086#1076#1086#1088#1086#1076#1085#1099#1077' '#1079#1077#1084#1083#1080' '#1080' '#1080#1089#1082#1072#1090#1100' '#1083#1091 +
+        #1095#1096#1077#1081' '#1078#1080#1079#1085#1080'... '#1054#1076#1085#1080#1084' '#1091#1090#1088#1086#1084' '#1074#1099' '#1088#1077#1096#1080#1083#1080' '#1074#1089#1105' '#1080#1079#1084#1077#1085#1080#1090#1100
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object ListBox1: TListBox
       Left = 144
@@ -1654,35 +1727,72 @@ object Form1: TForm1
       Height = 41
       Caption = #1053#1072#1095#1072#1090#1100' '#1080#1075#1088#1091
       TabOrder = 10
+      Visible = False
       OnClick = Button10Click
     end
   end
   object pnl2: TPanel
-    Left = 712
-    Top = 8
+    Left = 714
+    Top = 9
     Width = 185
     Height = 265
     TabOrder = 1
     object Label2: TLabel
-      Left = 104
-      Top = 16
-      Width = 31
+      Left = 61
+      Top = 15
+      Width = 3
       Height = 13
-      Caption = 'Label2'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object Label3: TLabel
-      Left = 16
-      Top = 72
-      Width = 31
+      Left = 55
+      Top = 34
+      Width = 3
       Height = 13
-      Caption = 'Label3'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
     object Label4: TLabel
-      Left = 104
-      Top = 72
-      Width = 31
+      Left = 56
+      Top = 53
+      Width = 3
       Height = 13
-      Caption = 'Label4'
+      Color = clRed
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentColor = False
+      ParentFont = False
+    end
+    object InventSword1: TImage
+      Left = 5
+      Top = 102
+      Width = 50
+      Height = 50
+      Visible = False
+    end
+    object Label5: TLabel
+      Left = 54
+      Top = 80
+      Width = 4
+      Height = 16
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
     end
   end
   object btn1: TButton
@@ -1690,7 +1800,7 @@ object Form1: TForm1
     Top = 288
     Width = 50
     Height = 50
-    Caption = 'Q'
+    Caption = 'Save'
     TabOrder = 2
     OnClick = btn1Click
   end

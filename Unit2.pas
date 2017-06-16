@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ExtCtrls, jpeg, Gauges, ComCtrls;
+  Dialogs, StdCtrls, Buttons, ExtCtrls, jpeg, Gauges, ComCtrls,
+  Vcl.Imaging.pngimage;
 
 type
   TForm2 = class(TForm)
@@ -27,15 +28,17 @@ type
     procedure btn3Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
-    procedure fight(att,attp:Integer);
+
   public
+    hpp,hp:Integer;
+    procedure fight(att,attp:Integer);
+    function endoffight(hpp,hp:Integer): Integer;
     procedure newfight();
   end;
 
 var
   att:Byte;
   attp,agip,strp,intp:Byte;
-  hpp,hp:Integer;
   Form2: TForm2;
   w:Boolean;
 
@@ -45,6 +48,11 @@ implementation
 uses Unit1;
 
 {$R *.dfm}
+
+procedure TForm2.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  form1.Enabled:=true;
+end;
 
 procedure TForm2.FormCreate(Sender: TObject);
 begin
@@ -72,6 +80,7 @@ begin
 end;
 
 procedure TForm2.fight(att,attp:Integer);
+var q: Integer;
 begin
   hp:=hp-attp;
   pb1.Position:=hp;
@@ -79,20 +88,34 @@ begin
   pb2.Position:=hpp;
   att:=0;
   attp:=0;
-  if (hpp<=0) then
-    begin
-      w:=True;
+  q := endoffight(hpp,hp);
+  if ( q > 0) then
+   begin
       Form1.Enabled:=True;
       Form2.Close;
-      Form1.enemy3d1.Visible:=False;
-    end;
-  if (hp<=0)then
-    begin
-      hp:=Form1.str*5;
-      hpp:=strp*5;
-    end;
+   end;
+
 end;
 
+function TForm2.endoffight(hpp,hp:Integer): Integer;
+begin
+  if (hpp<=0) and (hp > 0) then
+  begin
+    Result := 1;
+    Exit;
+  end;
+  if (hp<=0) and (hpp > 0) then
+  begin
+    Result := 2;
+    Exit;
+  end;
+  if (hp <=0) and (hpp <= 0) then
+  begin
+    Result := 3;
+    Exit;
+  end;
+  Result := 0;
+end;
 
 procedure TForm2.btn1Click(Sender: TObject);
 begin
@@ -155,10 +178,5 @@ begin
 end;
 
 
-
-procedure TForm2.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  Form1.Enabled := True;
-end;
 
 end.
