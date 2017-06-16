@@ -99,3 +99,4 @@ initialization
   RegisterTest(TestTForm2.Suite);
 end.
 
+

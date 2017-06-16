@@ -77,7 +77,7 @@ type
     procedure Button9Click(Sender: TObject);
     procedure Button10Click(Sender: TObject);
   private
-    fight: integer;
+    fight :integer;
     procedure jumplevel();
     procedure quest();
     procedure newhero();
@@ -144,95 +144,95 @@ end;
 
 
 
-procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char);
-var a:Integer;
-begin
-  if (fight = 0) then
-    begin
-    case key of
-    'W','w', 'Ö', 'ö':
-    begin
-          if (setlocation = 1) then
-            a := checkBarrier1(img2.Left, img2.Top, 1 );
-          if (setlocation = 2) then
-            a := checkBarrier2(img2.Left, img2.Top, 1 );
-          if (setlocation = 3) then
-            a := checkBarrier3(img2.Left, img2.Top, 1 );
-          if (a = 1) then
-          begin
-            if y[1]<>0 then
-            begin
-              img2.Top:=img2.Top - 10;
-              img2r.Top:=img2r.Top - 10;
-              y[1]:=y[1]-1;
-            end;
-         end;
-    end;
-    'A','a', 'Ô', 'ô':
-    begin
-       if (setlocation = 1) then
-        a := checkBarrier1(img2.Left , img2.Top, 2 );
-       if (setlocation = 2) then
-        a := checkBarrier2(img2.Left, img2.Top, 2 );
-        if (setlocation = 3) then
-            a := checkBarrier3(img2.Left, img2.Top, 2 );
-       if(a = 1) then
-        begin
-          if x[1]<>0 then
-            begin
-              img2.Left:=img2.Left - 10;
-              img2r.Left:=img2r.Left - 10;
-              img2.Visible := True;
-              img2r.Visible := False;
-              x[1]:=x[1]-1;
-            end;
-        end;
-    end;
-    'S','s', 'Û', 'û':
-    begin
-      if (setlocation = 1) then
-        a := checkBarrier1(img2.Left , img2.Top, 3 );
-      if (setlocation = 2) then
-        a := checkBarrier2(img2.Left, img2.Top, 3 );
-        if (setlocation = 3) then
-            a := checkBarrier3(img2.Left, img2.Top, 3 );
-      if(a = 1) then
-        begin
-          if y[1]<>33 then
-          begin
-              img2.Top:=img2.Top + 10;
-              img2r.Top:=img2r.Top + 10;
-              y[1]:=y[1]+1;
-            end;
-        end;
-    end;
-    'D','d', 'â', 'Â':
-     begin
-      if (setlocation = 1) then
-        a := checkBarrier1(img2.Left , img2.Top, 4 );
-      if (setlocation = 2) then
-        a := checkBarrier2(img2.Left, img2.Top, 4 );
-      if (setlocation = 3) then
-        a := checkBarrier3(img2.Left, img2.Top, 4 );
-      if(a = 1) then
-        begin
-          if x[1]<>65 then
-            begin
-              img2.Left :=img2.Left + 10;
-              img2r.Left :=img2r.Left + 10;
-              img2.Visible := False;
-              img2r.Visible := True;
-              x[1]:=x[1]+1;
-            end;
-        end;
-      end;
-    end;
-    jumplevel();
-    quest;
-    Form1.Refresh;
-  end;
-  if (fight = 1) then
-    endhistory();
+procedure TForm1.FormKeyPress(Sender: TObject; var Key: Char); 
+var a:Integer; 
+begin 
+if (fight = 0) then 
+begin 
+case key of 
+'W','w', 'Ö', 'ö': 
+begin 
+if (setlocation = 1) then 
+a := checkBarrier1(img2.Left, img2.Top, 1 ); 
+if (setlocation = 2) then 
+a := checkBarrier2(img2.Left, img2.Top, 1 ); 
+if (setlocation = 3) then 
+a := checkBarrier3(img2.Left, img2.Top, 1 ); 
+if (a = 1) then 
+begin 
+if y[1]<>0 then 
+begin 
+img2.Top:=img2.Top - 10; 
+img2r.Top:=img2r.Top - 10; 
+y[1]:=y[1]-1; 
+end; 
+end; 
+end; 
+'A','a', 'Ô', 'ô': 
+begin 
+if (setlocation = 1) then 
+a := checkBarrier1(img2.Left , img2.Top, 2 ); 
+if (setlocation = 2) then 
+a := checkBarrier2(img2.Left, img2.Top, 2 ); 
+if (setlocation = 3) then 
+a := checkBarrier3(img2.Left, img2.Top, 2 ); 
+if(a = 1) then 
+begin 
+if x[1]<>0 then 
+begin 
+img2.Left:=img2.Left - 10; 
+img2r.Left:=img2r.Left - 10; 
+img2.Visible := True; 
+img2r.Visible := False; 
+x[1]:=x[1]-1; 
+end; 
+end; 
+end; 
+'S','s', 'Û', 'û': 
+begin 
+if (setlocation = 1) then 
+a := checkBarrier1(img2.Left , img2.Top, 3 ); 
+if (setlocation = 2) then 
+a := checkBarrier2(img2.Left, img2.Top, 3 ); 
+if (setlocation = 3) then 
+a := checkBarrier3(img2.Left, img2.Top, 3 ); 
+if(a = 1) then 
+begin 
+if y[1]<>33 then 
+begin 
+img2.Top:=img2.Top + 10; 
+img2r.Top:=img2r.Top + 10; 
+y[1]:=y[1]+1; 
+end; 
+end; 
+end; 
+'D','d', 'â', 'Â': 
+begin 
+if (setlocation = 1) then 
+a := checkBarrier1(img2.Left , img2.Top, 4 ); 
+if (setlocation = 2) then 
+a := checkBarrier2(img2.Left, img2.Top, 4 ); 
+if (setlocation = 3) then 
+a := checkBarrier3(img2.Left, img2.Top, 4 ); 
+if(a = 1) then 
+begin 
+if x[1]<>65 then 
+begin 
+img2.Left :=img2.Left + 10; 
+img2r.Left :=img2r.Left + 10; 
+img2.Visible := False; 
+img2r.Visible := True; 
+x[1]:=x[1]+1; 
+end; 
+end; 
+end; 
+end; 
+jumplevel(); 
+quest; 
+Form1.Refresh; 
+end; 
+if (fight = 1) then 
+endhistory(); 
 end;
 
 

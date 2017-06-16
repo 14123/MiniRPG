@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
   <Transactions/>
@@ -5,3 +6,13 @@
     <Projects ActiveProject="C:\Users\Станислав\Documents\GitHub\MiniRPG\Test\Project1Tests.dproj"/>
   </Default.Personality>
 </BorlandProject>
+||||||| merged common ancestors
+=======
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions/>
+	<Default.Personality>
+		<Projects ActiveProject="C:\Users\Дмитрий\Desktop\11\MiniRPG\MiniRPG\Project1.dproj"/>
+	</Default.Personality>
+</BorlandProject>
+>>>>>>> origin/master

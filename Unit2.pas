@@ -93,8 +93,13 @@ begin
    begin
       Form1.Enabled:=True;
       Form2.Close;
+      Form1.enemy3d1.Visible:=False;
+  end;
+  if ( q = 2) then
+   begin
+      hp:=Form1.str*5;
+      hpp:=strp*5;
    end;
-
 end;
 
 function TForm2.endoffight(hpp,hp:Integer): Integer;
@@ -116,6 +121,7 @@ begin
   end;
   Result := 0;
 end;
+
 
 procedure TForm2.btn1Click(Sender: TObject);
 begin
@@ -176,6 +182,8 @@ begin
       end;
   fight(att,attp);
 end;
+
+
 
 
 
